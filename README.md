@@ -1,1 +1,5 @@
-# projectweblan
+# project Pemrograman Web Lanju (Sistem Informasi gudang barang elekronik)
+Akmal Gilang Rosadi ( 2067051001)
+Ade Putra Maghribi ( 2057051022)
+Muhammad Hanif ( 2017051004)
+M.Dzaky Fadhil Athaya ( 2017051005)
