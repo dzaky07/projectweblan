@@ -59,6 +59,7 @@ class Kategori extends BaseController
             session()->setFlashdata($pesan);
             return redirect()->to('/kategori/index');
         }
+
     }
     public function formedit($id){
         $rowData = $this->kategori->find($id);
@@ -110,5 +111,6 @@ class Kategori extends BaseController
             session()->setFlashdata($pesan);
             return redirect()->to('/kategori/index');
         }
+main
     }
 }
