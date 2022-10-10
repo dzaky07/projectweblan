@@ -60,9 +60,6 @@ class Kategori extends BaseController
             return redirect()->to('/kategori/index');
         }
  
-
-
- main
     }
     public function formedit($id){
         $rowData = $this->kategori->find($id);
@@ -129,8 +126,5 @@ class Kategori extends BaseController
         }else{
             exit('Data tidak ditemukan');
         }
-
-main
- main
     }
 } 
