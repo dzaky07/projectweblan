@@ -6,9 +6,15 @@ Kategori
 
 <?= $this->section('subjudul') ?>
 
+
+<?= form_button('', 'Tambah Data', [
+    'class' => 'btn btn-primary',
+    'onclick' => "location.href=('" . site_url('kategori/formtambah') . "')"
+
 <?= form_button('','Tambah Data',[
     'class' => 'btn btn-primary',
     'onclick' => "location.href=('". site_url('kategori/formtambah') ."')"
+main
 ]) ?>
 
 <?= $this->endSection('subjudul') ?>
@@ -30,6 +36,22 @@ Kategori
         $nomor = 1;
         foreach ($tampildata as $row) :
         ?>
+
+            <tr>
+                <td><?= $nomor++; ?></td>
+                <td><?= $row['katnama']; ?></td>
+                <td>
+                    <button type="button" class="btn btn-info" title="Edit Data" onclick="edit('<?= $row['katid'] ?>')">
+                        <i class="fa fa-edit"></i>
+                    </button>
+
+                    <button type="button" class="btn btn-danger" title="Hapus Data">
+                        <i class="fa fa-trash-alt"></i>
+                    </button>
+
+                </td>
+            </tr>
+
 <tr>
     <td><?= $nomor++; ?></td>
     <td><?= $row['katnama']; ?></td>
@@ -37,11 +59,18 @@ Kategori
 
     </td>
 </tr>
+main
 
         <?php endforeach; ?>
     </tbody>
 </table>
 
+<script>
+    function edit(id){
+        window.location = ('/kategori/formedit/' + id);
+    }
+</script>
+main
 
 
 <?= $this->endSection('isi') ?>

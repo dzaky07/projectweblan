@@ -59,5 +59,58 @@ class Kategori extends BaseController
             session()->setFlashdata($pesan);
             return redirect()->to('/kategori/index');
         }
+
+    }
+    public function formedit($id){
+        $rowData = $this->kategori->find($id);
+        if($rowData){
+
+            $data =[
+                'id' => $id,
+                'nama' => $rowData['katnama']
+            ];
+
+            return view('kategori/formedit', $data);
+
+        }else{
+            exit('Data tidak ditemukan');
+        }
+    }
+    public function updatedata(){
+        $idkategori = $this->request->getVar('idkategori');
+        $namakategori = $this->request->getVar('namakategori');
+
+        $validation = \config\Services::validation();
+
+        $valid = $this->validate([
+            'namakategori' => [
+                'rules' => 'required',
+                'label' => 'Nama Kategori',
+                'errors' => [
+                    'required' => '{field} tidak boleh kosong'
+                ]
+            ]
+        ]);
+
+        if (!$valid) {
+            $pesan = [
+                'errorNamaKategori' => '<br><div class="alert alert-danger">' . $validation->getError() . '</div>'
+            ];
+
+            session()->setFlashdata($pesan);
+            return redirect()->to('/kategori/formedit/' .$idkategori);
+        }else{
+            $this->kategori->update($idkategori,[
+                'katnama' => $namakategori
+            ]);
+
+            $pesan = [
+                'sukses' => '<div class="alert alert-success">Data Berhasil diedit...</div>'
+            ];
+
+            session()->setFlashdata($pesan);
+            return redirect()->to('/kategori/index');
+        }
+main
     }
 }
