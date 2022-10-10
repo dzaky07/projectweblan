@@ -1,13 +1,58 @@
 <?= $this->extend('main/layout') ?>
 
 <?= $this->section('judul') ?>
-Ini Adalah Judul Kategori
+Kategori
 <?= $this->endSection('judul') ?>
 
 <?= $this->section('subjudul') ?>
-Ini adalah Data Kategori
+
+<?= form_button('', 'Tambah Data', [
+    'class' => 'btn btn-primary',
+    'onclick' => "location.href=('" . site_url('kategori/formtambah') . "')"
+]) ?>
+
 <?= $this->endSection('subjudul') ?>
 
 <?= $this->section('isi') ?>
-Ini adalah isi Kategori
+
+<?= session()->getFlashdata('sukses'); ?>
+<table class="table table-striped table-bordered" style="width:100%;">
+    <thead>
+        <tr>
+            <th style="width: 15%;">No</th>
+            <th>Nama Kategori</th>
+            <th style="width: 15%;">Aksi</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <?php
+        $nomor = 1;
+        foreach ($tampildata as $row) :
+        ?>
+            <tr>
+                <td><?= $nomor++; ?></td>
+                <td><?= $row['katnama']; ?></td>
+                <td>
+                    <button type="button" class="btn btn-info" title="Edit Data" onclick="edit('<?= $row['katid'] ?>')">
+                        <i class="fa fa-edit"></i>
+                    </button>
+
+                    <button type="button" class="btn btn-danger" title="Hapus Data">
+                        <i class="fa fa-trash-alt"></i>
+                    </button>
+
+                </td>
+            </tr>
+
+        <?php endforeach; ?>
+    </tbody>
+</table>
+<script>
+    function edit(id){
+        window.location = ('/kategori/formedit/' + id);
+    }
+</script>
+
+
 <?= $this->endSection('isi') ?>

@@ -21,22 +21,21 @@ class Barang extends Migration
                 'type' => 'int',
                 'unsigned' => true
             ],
-            'brgsatid' => [
-                'type' => 'int',
-                'unsigned' => true
-            ],
             'brgharga' => [
                 'type' => 'double',
             ],
             'brggambar' => [
                 'type' => 'varchar',
                 'constraint' => 200
+            ],
+            'brgsatuan' => [
+                'type' => 'varchar',
+                'constraint' => '25'
             ]
         ]);
  
         $this->forge->addPrimaryKey('brgkode');
         $this->forge->addForeignKey('brgkatid', 'kategori', 'katid');
-        $this->forge->addForeignKey('brgsatid', 'satuan', 'satid');
  
         $this->forge->createTable('barang');
     }

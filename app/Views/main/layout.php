@@ -81,12 +81,6 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?= site_url('satuan/index'); ?>" class="nav-link">
-                                <i class="nav-icon fa fa-chevron-circle-right text-warning"></i>
-                                <p class="text">Satuan</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a href="<?= site_url('barang/index'); ?>" class="nav-link">
                                 <i class="nav-icon fa fa-chevron-circle-right text-primary"></i>
                                 <p class="text">Data Barang</p>
