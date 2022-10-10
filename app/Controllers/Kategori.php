@@ -59,6 +59,10 @@ class Kategori extends BaseController
             session()->setFlashdata($pesan);
             return redirect()->to('/kategori/index');
         }
+ 
+
+
+ main
     }
     public function formedit($id){
         $rowData = $this->kategori->find($id);
@@ -110,6 +114,7 @@ class Kategori extends BaseController
             session()->setFlashdata($pesan);
             return redirect()->to('/kategori/index');
         }
+ 
     }
     public function hapus($id){
         $rowData = $this->kategori->find($id);
@@ -124,5 +129,8 @@ class Kategori extends BaseController
         }else{
             exit('Data tidak ditemukan');
         }
+
+main
+ main
     }
 } 
