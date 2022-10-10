@@ -19,8 +19,6 @@ Kategori
 <?= form_button('','Tambah Data',[
     'class' => 'btn btn-primary',
     'onclick' => "location.href=('". site_url('kategori/formtambah') ."')"
-main
-main
 ]) ?>
 
 <?= $this->endSection('subjudul') ?>
@@ -45,7 +43,6 @@ main
 
 
 
- main
             <tr>
                 <td><?= $nomor++; ?></td>
                 <td><?= $row['katnama']; ?></td>
@@ -58,7 +55,6 @@ main
                     <button type="button" class="btn btn-danger" title="Hapus Data" onclick="hapus('<?= $row['katid'] ?>')">
 
                     <button type="button" class="btn btn-danger" title="Hapus Data">
- main
                         <i class="fa fa-trash-alt"></i>
                     </button>
 
@@ -103,8 +99,4 @@ main
         window.location = ('/kategori/formedit/' + id);
     }
 </script>
-main
-main
-
-
 <?= $this->endSection('isi') ?>
