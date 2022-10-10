@@ -6,6 +6,11 @@ Kategori
 
 <?= $this->section('subjudul') ?>
 
+ 
+<?= form_button('', 'Tambah Data', [
+    'class' => 'btn btn-primary',
+    'onclick' => "location.href=('" . site_url('kategori/formtambah') . "')"
+
 
 <?= form_button('', 'Tambah Data', [
     'class' => 'btn btn-primary',
@@ -14,6 +19,7 @@ Kategori
 <?= form_button('','Tambah Data',[
     'class' => 'btn btn-primary',
     'onclick' => "location.href=('". site_url('kategori/formtambah') ."')"
+main
 main
 ]) ?>
 
@@ -37,6 +43,9 @@ main
         foreach ($tampildata as $row) :
         ?>
 
+
+
+ main
             <tr>
                 <td><?= $nomor++; ?></td>
                 <td><?= $row['katnama']; ?></td>
@@ -45,12 +54,36 @@ main
                         <i class="fa fa-edit"></i>
                     </button>
 
+
+                    <button type="button" class="btn btn-danger" title="Hapus Data" onclick="hapus('<?= $row['katid'] ?>')">
+
                     <button type="button" class="btn btn-danger" title="Hapus Data">
+ main
                         <i class="fa fa-trash-alt"></i>
                     </button>
 
                 </td>
             </tr>
+
+
+        <?php endforeach; ?>
+    </tbody>
+</table>
+<script>
+    function edit(id){
+         
+    }
+
+    function hapus(id){
+       pesan = confirm('yakin data kategori di hapus?');
+       if(pesan){
+        window.location = ('/kategori/hapus/' + id);
+
+       }else{
+        return false;
+       }
+    }
+</script>
 
 <tr>
     <td><?= $nomor++; ?></td>
@@ -70,6 +103,7 @@ main
         window.location = ('/kategori/formedit/' + id);
     }
 </script>
+main
 main
 
 
