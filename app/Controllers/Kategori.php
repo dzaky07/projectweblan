@@ -14,7 +14,8 @@ class Kategori extends BaseController
     public function index()
     {
         $data = [
-            'tampildata' => $this->kategori->findAll()
+            'tampildata' => $this->kategori->paginate(5, 'kategori'),
+            'pager' => $this->kategori->pager
         ];
         return view('kategori/viewkategori', $data);
     }
@@ -59,7 +60,6 @@ class Kategori extends BaseController
             session()->setFlashdata($pesan);
             return redirect()->to('/kategori/index');
         }
-
     }
     public function formedit($id){
         $rowData = $this->kategori->find($id);
@@ -111,6 +111,23 @@ class Kategori extends BaseController
             session()->setFlashdata($pesan);
             return redirect()->to('/kategori/index');
         }
-main
     }
-}
+    public function hapus($id){
+        $rowData = $this->kategori->find($id);
+        if($rowData){
+            $this->kategori->delete($id);
+            $pesan = [
+                'sukses' => '<div class="alert alert-success">Data Berhasil dihapus...</div>'
+            ];
+
+          
+            session()->setFlashdata($pesan);
+            return redirect()->to('/kategori/index/');
+            
+
+        }else{
+            exit('Data tidak ditemukan');
+            
+        }
+    }
+} 
