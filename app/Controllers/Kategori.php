@@ -13,8 +13,24 @@ class Kategori extends BaseController
     }
     public function index()
     {
+        $tombolcari = $this->request->getPost('tombolcari');
+
+        if(isset($tombolcari)){
+            $cari = $this->request->getPost('cari');
+            session()->set('cari_kategori', $cari);
+            redirect()->to('/kategori/index');
+        }else{
+            $cari = session()->get('cari_kategori');
+        }
+
+        $dataKategori = $cari ? $this->kategori->cariData($cari)->paginate(5, 'kategori') : $this->kategori->paginate(5, 'kategori');
+
+        $nohalaman = $this->request->getVar('page_kategori') ? $this->request->getVar('page_kategori') : 1;
         $data = [
-            'tampildata' => $this->kategori->findAll()
+            'tampildata' => $dataKategori,
+            'pager' => $this->kategori->pager,
+            'nohalaman' => $nohalaman,
+            'cari' => $cari
         ];
         return view('kategori/viewkategori', $data);
     }
@@ -59,10 +75,6 @@ class Kategori extends BaseController
             session()->setFlashdata($pesan);
             return redirect()->to('/kategori/index');
         }
- 
-
-
- main
     }
     public function formedit($id){
         $rowData = $this->kategori->find($id);
@@ -114,23 +126,23 @@ class Kategori extends BaseController
             session()->setFlashdata($pesan);
             return redirect()->to('/kategori/index');
         }
- 
     }
     public function hapus($id){
         $rowData = $this->kategori->find($id);
         if($rowData){
+            $this->kategori->delete($id);
             $pesan = [
                 'sukses' => '<div class="alert alert-success">Data Berhasil dihapus...</div>'
             ];
 
-            $this->kategori->delete($id);
+          
+            session()->setFlashdata($pesan);
+            return redirect()->to('/kategori/index/');
             
 
         }else{
             exit('Data tidak ditemukan');
+            
         }
-
-main
- main
     }
 } 
