@@ -8,6 +8,11 @@ class Modelbarang extends Model
 {
     protected $table         ='barang';
     protected $primaryKey    ='brgkode';
+
+    protected $primaryKey    ='brgkode';
+
+    protected $primarykey    ='brgkode';
+
     protected $allowedFields =[
         'brgkode', 'brgnama', 'brgkatid', 'brgharga', 'brggambar', 'brgstok'
     ]; 
@@ -18,4 +23,10 @@ class Modelbarang extends Model
     public function tampildata_cari($cari){
         return $this->table('barang')->join('kategori', 'brgkatid=katid')->orlike('brgkode', $cari)->orlike('brgnama', $cari)->orlike('katnama', $cari);
     }
+}
+        return $this->table('barang')->join('kategori', 'brgkatid=katid')->get();
+    }
+
+}
+
 }

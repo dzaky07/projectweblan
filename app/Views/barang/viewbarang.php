@@ -5,13 +5,15 @@ Ini Adalah Judul Barang
 <?= $this->endSection('judul') ?>
 
 <?= $this->section('subjudul') ?>
-Ini adalah Data Barang
+
+<button type="button" class="btn btn-sm btn-primary" onclick="location.href=('/barang/tambah')">
+    <i class="fa fa-plus-circle"></i> Tambah Barang
+</button>
+
 <?= $this->endSection('subjudul') ?>
 
 <?= $this->section('isi') ?>
-<<<<<<< Updated upstream
 Ini adalah isi Barang
-=======
 <?= session()->getFlashdata('error'); ?>
 <?= session()->getFlashdata('sukses'); ?>
 <?= form_open('barang/index') ?>
@@ -24,6 +26,12 @@ Ini adalah isi Barang
     </div>
 </div>
 <?= form_close(); ?>
+<?= session()->getFlashdata('error'); ?>
+<?= session()->getFlashdata('sukses'); ?>
+
+
+
+
 <table class="table table-striped table-bordered" style="width:100%;">
     <thead>
         <tr>
@@ -41,6 +49,8 @@ Ini adalah isi Barang
         <?php
         $nomor = 1;
         foreach ($tampildata as $row) :
+=======
+        foreach ($tampildata->getResultArray() as $row) :
         ?>
             <tr>
                 <td><?= $nomor++; ?></td>
@@ -63,6 +73,10 @@ Ini adalah isi Barang
                         </button>
                     </form>
 
+                <td><?= number_format($row['brgharga'],0); ?></td>
+                <td><?= number_format($row['brgstok'],0); ?></td>
+                <td>
+
                 </td>
             </tr>
 
@@ -82,9 +96,17 @@ Ini adalah isi Barang
         if (pesan) {
             return true;
         } else {
+        if(pesan){
+            return true;
+        }else{
             return false;
         }
     }
 </script>
->>>>>>> Stashed changes
 <?= $this->endSection('isi') ?>
+<?= $this->endSection('isi') ?>
+
+
+
+<?= $this->endSection('isi') ?>
+
