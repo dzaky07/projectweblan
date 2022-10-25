@@ -13,14 +13,44 @@ class Kategori extends BaseController
     }
     public function index()
     {
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+        $tombolcari = $this->request->getPost('tombolcari');
+
+        if(isset($tombolcari)){
+            $cari = $this->request->getPost('cari');
+            session()->set('cari_kategori', $cari);
+            redirect()->to('/kategori/index');
+        }else{
+            $cari = session()->get('cari_kategori');
+        }
+
+        $dataKategori = $cari ? $this->kategori->cariData($cari)->paginate(5, 'kategori') : $this->kategori->paginate(5, 'kategori');
+
+        $nohalaman = $this->request->getVar('page_kategori') ? $this->request->getVar('page_kategori') : 1;
+=======
+=======
+>>>>>>> abcabe36fcc18496ecb6dba746cc93bda96164a6
+>>>>>>> Stashed changes
 
         return view('kategori/viewkategori');
     }
 }
 
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+>>>>>>> abcabe36fcc18496ecb6dba746cc93bda96164a6
+=======
+>>>>>>> abcabe36fcc18496ecb6dba746cc93bda96164a6
+>>>>>>> Stashed changes
         $data = [
-            'tampildata' => $this->kategori->paginate(5, 'kategori'),
-            'pager' => $this->kategori->pager
+            'tampildata' => $dataKategori,
+            'pager' => $this->kategori->pager,
+            'nohalaman' => $nohalaman,
+            'cari' => $cari
         ];
         return view('kategori/viewkategori', $data);
     }
