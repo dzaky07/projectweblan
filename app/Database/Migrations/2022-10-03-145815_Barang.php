@@ -28,9 +28,9 @@ class Barang extends Migration
                 'type' => 'varchar',
                 'constraint' => 200
             ],
-            'brgsatuan' => [
-                'type' => 'varchar',
-                'constraint' => '25'
+            'brgstok' => [
+                'type' => 'int',
+                'constraint' => '11'
             ]
         ]);
  
