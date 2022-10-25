@@ -18,7 +18,6 @@ Ini adalah Data Kategori
 Ini adalah isi Kategori
 
 
-<<<<<<< Updated upstream
 <?= form_button('', 'Tambah Data', [
     'class' => 'btn btn-primary',
     'onclick' => "location.href=('" . site_url('kategori/formtambah') . "')"
@@ -29,31 +28,6 @@ Ini adalah isi Kategori
 <?= $this->section('isi') ?>
 
 
- 
-<?= form_button('', 'Tambah Data', [
-    'class' => 'btn btn-primary',
-    'onclick' => "location.href=('" . site_url('kategori/formtambah') . "')"
-
-
-=======
->>>>>>> Stashed changes
-<?= form_button('', 'Tambah Data', [
-    'class' => 'btn btn-primary',
-    'onclick' => "location.href=('" . site_url('kategori/formtambah') . "')"
-
-<?= form_button('','Tambah Data',[
-    'class' => 'btn btn-primary',
-    'onclick' => "location.href=('". site_url('kategori/formtambah') ."')"
-
-]) ?>
-
-<?= $this->endSection('subjudul') ?>
-
-<?= $this->section('isi') ?>
-
-
-<<<<<<< Updated upstream
-=======
  
 <?= form_button('', 'Tambah Data', [
     'class' => 'btn btn-primary',
@@ -75,7 +49,27 @@ Ini adalah isi Kategori
 <?= $this->section('isi') ?>
 
 
->>>>>>> Stashed changes
+ 
+<?= form_button('', 'Tambah Data', [
+    'class' => 'btn btn-primary',
+    'onclick' => "location.href=('" . site_url('kategori/formtambah') . "')"
+
+
+<?= form_button('', 'Tambah Data', [
+    'class' => 'btn btn-primary',
+    'onclick' => "location.href=('" . site_url('kategori/formtambah') . "')"
+
+<?= form_button('','Tambah Data',[
+    'class' => 'btn btn-primary',
+    'onclick' => "location.href=('". site_url('kategori/formtambah') ."')"
+
+]) ?>
+
+<?= $this->endSection('subjudul') ?>
+
+<?= $this->section('isi') ?>
+
+
 <?= session()->getFlashdata('sukses'); ?>
 <?= form_open('kategori/index') ?>
 <div class="input-group mb-3">
@@ -111,11 +105,6 @@ Ini adalah isi Kategori
 
                     <form method="POST" action="/kategori/hapus/<?= $row['katid'] ?>" style="display:inline;" onsubmit="hapus();">
                         <input type="hidden" value="DELETE" name="_method">
-
-
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
                         <button type="submit" class="btn btn-danger" title="Hapus Data">
                             <i class="fa fa-trash-alt"></i>
                         </button>
@@ -131,30 +120,16 @@ Ini adalah isi Kategori
                     <button type="button" class="btn btn-danger" title="Hapus Data">
                         <i class="fa fa-trash-alt"></i>
                     </button>
-
-
-=======
->>>>>>> abcabe36fcc18496ecb6dba746cc93bda96164a6
                         <button type="submit" class="btn btn-danger" title="Hapus Data">
-                        <i class="fa fa-trash-alt"></i>
+                            <i class="fa fa-trash-alt"></i>
                         </button>
                     </form>
-       
-                </td>
-            </tr>
 
-
-
-<<<<<<< HEAD
-=======
                     <button type="button" class="btn btn-danger" title="Hapus Data" onclick="hapus('<?= $row['katid'] ?>')">
 
                     <button type="button" class="btn btn-danger" title="Hapus Data">
                         <i class="fa fa-trash-alt"></i>
                     </button>
-
-
->>>>>>> Stashed changes
                         <button type="submit" class="btn btn-danger" title="Hapus Data">
                         <i class="fa fa-trash-alt"></i>
                         </button>
@@ -165,7 +140,6 @@ Ini adalah isi Kategori
 
 
 
-<<<<<<< Updated upstream
                     <button type="button" class="btn btn-danger" title="Hapus Data" onclick="hapus('<?= $row['katid'] ?>')">
 
                     <button type="button" class="btn btn-danger" title="Hapus Data">
@@ -224,11 +198,9 @@ Ini adalah isi Kategori
 
     </td>
 </tr>
+                </td>
+            </tr>
 
-
-
-=======
->>>>>>> Stashed changes
         <?php endforeach; ?>
     </tbody>
 </table>
@@ -247,6 +219,9 @@ Ini adalah isi Kategori
 
          
     }
+<div class="float-center">
+    <?= $pager->links('kategori', 'paging'); ?>
+</div>
 
     function hapus(id){
        pesan = confirm('yakin data kategori di hapus?');
@@ -270,25 +245,19 @@ Ini adalah isi Kategori
 
     </td>
 </tr>
-
-
-
->>>>>>> abcabe36fcc18496ecb6dba746cc93bda96164a6
         <?php endforeach; ?>
     </tbody>
 </table>
 <script>
-    function edit(id){
-
+    function edit(id) {
         window.location = ('/kategori/formedit/' + id);
     }
 </script>
 
-      
 <script>
-    function hapus(){
-       pesan = confirm('yakin data kategori di hapus?');
-       if (pesan) {
+    function hapus() {
+        pesan = confirm('yakin data kategori di hapus?');
+        if (pesan) {
             return true;
 
          
@@ -303,15 +272,15 @@ Ini adalah isi Kategori
        }else{
         return false;
        }
+        } else {
+            return false;
+        }
     }
 </script>
 
 
 <?= $this->endSection('isi') ?>
 
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
 <tr>
     <td><?= $nomor++; ?></td>
     <td><?= $row['katnama']; ?></td>
@@ -336,10 +305,6 @@ Ini adalah isi Kategori
     }
 </script>
 
-<<<<<<< HEAD
-=======
-      
->>>>>>> abcabe36fcc18496ecb6dba746cc93bda96164a6
 <script>
     function hapus() {
         pesan = confirm('yakin data kategori di hapus?');
@@ -351,10 +316,6 @@ Ini adalah isi Kategori
     }
 </script>
 
-
 <?= $this->endSection('isi') ?>
 
-=======
->>>>>>> abcabe36fcc18496ecb6dba746cc93bda96164a6
->>>>>>> Stashed changes
 
