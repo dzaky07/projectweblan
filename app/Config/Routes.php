@@ -37,6 +37,10 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 $routes->get('/', 'Main::index');
 $routes->get('/kategori/hapus/(:any)','kategori::index');
+$routes->delete('/kategori/hapus/(:any)','kategori::hapus/$1');
+
+$routes->get('/barang/hapus/(:any)','barang::index');
+$routes->delete('/barang/hapus/(:any)','barang::hapus/$1');
 
 /*
  * --------------------------------------------------------------------
