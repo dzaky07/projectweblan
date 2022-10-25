@@ -13,8 +13,13 @@ Ini Adalah Judul Barang
 <?= $this->endSection('subjudul') ?>
 
 <?= $this->section('isi') ?>
+
 <?= session()->getFlashdata('error'); ?>
 <?= session()->getFlashdata('sukses'); ?>
+
+
+
+
 <table class="table table-striped table-bordered" style="width:100%;">
     <thead>
         <tr>
@@ -38,6 +43,7 @@ Ini Adalah Judul Barang
                 <td><?= $row['brgkode']; ?></td>
                 <td><?= $row['brgnama']; ?></td>
                 <td><?= $row['katnama']; ?></td>
+
                 <td><?= number_format($row['brgharga'], 0); ?></td>
                 <td><?= number_format($row['brgstok'], 0); ?></td>
                 <td>
@@ -54,12 +60,19 @@ Ini Adalah Judul Barang
                         </button>
                     </form>
 
+
+                <td><?= number_format($row['brgharga'],0); ?></td>
+                <td><?= number_format($row['brgstok'],0); ?></td>
+                <td>
+
+
                 </td>
             </tr>
 
         <?php endforeach; ?>
     </tbody>
 </table>
+
 <script>
     function edit(kode) {
         window.location.href = ('/barang/edit/' + kode);
@@ -75,3 +88,8 @@ Ini Adalah Judul Barang
     }
 </script>
 <?= $this->endSection('isi') ?>
+
+
+
+<?= $this->endSection('isi') ?>
+
