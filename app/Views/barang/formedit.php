@@ -3,10 +3,6 @@
 <?= $this->section('judul') ?>
 Form Edit Barang
 
-Form Edit Barang
-
-Form Tambah Barang
-
 <?= $this->endSection('judul') ?>
 
 <?= $this->section('subjudul') ?>
@@ -23,7 +19,6 @@ Form Tambah Barang
 <?= form_open_multipart('barang/updatedata') ?>
 
 <?= form_open_multipart('barang/simpandata') ?>
-
 <?= session()->getFlashdata('error'); ?>
 <?= session()->getFlashdata('sukses'); ?>
 <div class="form-group row">
@@ -66,7 +61,7 @@ Form Tambah Barang
         
         <?php endif; ?>
         <?php endforeach; ?>
-
+      
       <option selected value="">=Pilih=</option>
       <?php foreach ($datakategori as $kat) : ?>
         <option value="<?= $kat['katid'] ?>"><?= $kat['katnama'] ?></option>
@@ -100,7 +95,6 @@ Form Tambah Barang
   <label for="" class="col-sm-4 col-form-label">Gambar Yang Sudah Ada</label>
   <div class="col-sm-4">
     <img src="<?= base_url().'/'.$gambar ?>" class="img-thumbnail" style="width: 50%;" alt="Gambar Barang">
-
     <input type="number" class="form-control" id="stok" name="stok">
 
   </div>

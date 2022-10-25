@@ -13,12 +13,15 @@ Ini Adalah Judul Barang
 <?= $this->endSection('subjudul') ?>
 
 <?= $this->section('isi') ?>
-Ini adalah isi Barang
+
 <?= session()->getFlashdata('error'); ?>
 <?= session()->getFlashdata('sukses'); ?>
 <?= form_open('barang/index') ?>
 <div class="input-group mb-3">
+    <input type="text" class="form-control" placeholder="Cari data berdasarkan Kode, Nama Barang & Kategori" name="cari" autofocus value="<?= $cari?>">
+
     <input type="text" class="form-control" placeholder="Cari data berdasarkan Kode, Nama Barang & Kategori" name="cari" autofocus>
+
     <div class="input-group-append">
         <button class="btn btn-outline-success" type="submit" name="tombolcari">
             <i class="fa fa-search"></i>
@@ -26,8 +29,16 @@ Ini adalah isi Barang
     </div>
 </div>
 <?= form_close(); ?>
+
+<span class="badge badge-success">
+    <h5>
+        <?= "Total Data : $totaldata"; ?>
+    </h5>
+</span>
+<br>
 <?= session()->getFlashdata('error'); ?>
 <?= session()->getFlashdata('sukses'); ?>
+
 
 
 
@@ -47,9 +58,12 @@ Ini adalah isi Barang
 
     <tbody>
         <?php
+
+        $nomor = 1 + (($nohalaman - 1) * 10);
+        foreach ($tampildata as $row) :
+
         $nomor = 1;
         foreach ($tampildata as $row) :
-=======
         foreach ($tampildata->getResultArray() as $row) :
         ?>
             <tr>
@@ -104,9 +118,5 @@ Ini adalah isi Barang
     }
 </script>
 <?= $this->endSection('isi') ?>
-<?= $this->endSection('isi') ?>
 
-
-
-<?= $this->endSection('isi') ?>
 
