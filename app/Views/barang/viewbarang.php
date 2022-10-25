@@ -13,7 +13,19 @@ Ini Adalah Judul Barang
 <?= $this->endSection('subjudul') ?>
 
 <?= $this->section('isi') ?>
-
+Ini adalah isi Barang
+<?= session()->getFlashdata('error'); ?>
+<?= session()->getFlashdata('sukses'); ?>
+<?= form_open('barang/index') ?>
+<div class="input-group mb-3">
+    <input type="text" class="form-control" placeholder="Cari data berdasarkan Kode, Nama Barang & Kategori" name="cari" autofocus>
+    <div class="input-group-append">
+        <button class="btn btn-outline-success" type="submit" name="tombolcari">
+            <i class="fa fa-search"></i>
+        </button>
+    </div>
+</div>
+<?= form_close(); ?>
 <?= session()->getFlashdata('error'); ?>
 <?= session()->getFlashdata('sukses'); ?>
 
@@ -36,6 +48,8 @@ Ini Adalah Judul Barang
     <tbody>
         <?php
         $nomor = 1;
+        foreach ($tampildata as $row) :
+=======
         foreach ($tampildata->getResultArray() as $row) :
         ?>
             <tr>
@@ -43,7 +57,6 @@ Ini Adalah Judul Barang
                 <td><?= $row['brgkode']; ?></td>
                 <td><?= $row['brgnama']; ?></td>
                 <td><?= $row['katnama']; ?></td>
-
                 <td><?= number_format($row['brgharga'], 0); ?></td>
                 <td><?= number_format($row['brgstok'], 0); ?></td>
                 <td>
@@ -60,11 +73,9 @@ Ini Adalah Judul Barang
                         </button>
                     </form>
 
-
                 <td><?= number_format($row['brgharga'],0); ?></td>
                 <td><?= number_format($row['brgstok'],0); ?></td>
                 <td>
-
 
                 </td>
             </tr>
@@ -72,7 +83,9 @@ Ini Adalah Judul Barang
         <?php endforeach; ?>
     </tbody>
 </table>
-
+<div class="float-left mt-4">
+    <?= $pager->links('barang','paging') ?>
+</div>
 <script>
     function edit(kode) {
         window.location.href = ('/barang/edit/' + kode);
@@ -80,6 +93,9 @@ Ini Adalah Judul Barang
 
     function hapus(kode) {
         pesan = confirm('Yakin data barang ini dihapus ?');
+        if (pesan) {
+            return true;
+        } else {
         if(pesan){
             return true;
         }else{
@@ -87,6 +103,7 @@ Ini Adalah Judul Barang
         }
     }
 </script>
+<?= $this->endSection('isi') ?>
 <?= $this->endSection('isi') ?>
 
 

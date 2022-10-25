@@ -1,6 +1,7 @@
 <?= $this->extend('main/layout') ?>
 
 <?= $this->section('judul') ?>
+Form Edit Barang
 
 Form Edit Barang
 
@@ -17,6 +18,7 @@ Form Tambah Barang
 <?= $this->endSection('subjudul') ?>
 
 <?= $this->section('isi') ?>
+<?= form_open_multipart('barang/updatedata') ?>
 
 <?= form_open_multipart('barang/updatedata') ?>
 
@@ -27,6 +29,7 @@ Form Tambah Barang
 <div class="form-group row">
   <label for="" class="col-sm-4 col-form-label">Kode Barang</label>
   <div class="col-sm-8">
+    <input type="Text" class="form-control" id="kodebarang" name="kodebarang" readonly value="<?= $kodebarang; ?>">
 
     <input type="Text" class="form-control" id="kodebarang" name="kodebarang" readonly value="<?= $kodebarang; ?>">
 
@@ -38,6 +41,7 @@ Form Tambah Barang
 <div class="form-group row">
   <label for="" class="col-sm-4 col-form-label">Nama Barang</label>
   <div class="col-sm-8">
+    <input type="Text" class="form-control" id="namabarang" name="namabarang" value="<?= $namabarang; ?>">
 
     <input type="Text" class="form-control" id="namabarang" name="namabarang" value="<?= $namabarang; ?>">
 
@@ -50,7 +54,6 @@ Form Tambah Barang
   <label for="" class="col-sm-4 col-form-label">Pilih Kategori</label>
   <div class="col-sm-4">
     <select name="kategori" id="kategori" class="form-control">
-
         <?php foreach ($datakategori as $kat) : ?>
 
         <?php if ($kat['katid'] == $kategori) : ?>
@@ -76,6 +79,7 @@ Form Tambah Barang
 <div class="form-group row">
   <label for="" class="col-sm-4 col-form-label">Harga</label>
   <div class="col-sm-4">
+    <input type="number" class="form-control" id="harga" name="harga" value="<?= $harga; ?>">
 
     <input type="number" class="form-control" id="harga" name="harga" value="<?= $harga; ?>">
 
@@ -103,6 +107,7 @@ Form Tambah Barang
 </div>
 
 <div class="form-group row">
+  <label for="" class="col-sm-4 col-form-label">Upload Gambar (<i>Jika diganti..</i>)</label>
 
   <label for="" class="col-sm-4 col-form-label">Upload Gambar (<i>Jika diganti..</i>)</label>
 
