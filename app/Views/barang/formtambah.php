@@ -25,6 +25,7 @@ Form Tambah Barang
 
     <input type="Text" class="form-control" id="Kodebarang" name="kodebarang" autofocus>
 
+
   </div>
 </div>
 
