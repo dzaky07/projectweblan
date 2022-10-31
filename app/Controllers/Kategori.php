@@ -13,12 +13,70 @@ class Kategori extends BaseController
     }
     public function index()
     {
+
         $tombolcari = $this->request->getPost('tombolcari');
 
         if(isset($tombolcari)){
             $cari = $this->request->getPost('cari');
             session()->set('cari_kategori', $cari);
             redirect()->to('/kategori/index');
+        }else{
+            $cari = session()->get('cari_kategori');
+        }
+
+        $dataKategori = $cari ? $this->kategori->cariData($cari)->paginate(5, 'kategori') : $this->kategori->paginate(5, 'kategori');
+
+        $nohalaman = $this->request->getVar('page_kategori') ? $this->request->getVar('page_kategori') : 1;
+
+        return view('kategori/viewkategori');
+    }
+}
+
+        $data = [
+            'tampildata' => $dataKategori,
+            'pager' => $this->kategori->pager,
+            'nohalaman' => $nohalaman,
+            'cari' => $cari
+        ];
+        return view('kategori/viewkategori', $data);
+    }
+
+    public function formtambah()
+    {
+        return view('kategori/formtambah');
+    }
+
+    public function simpandata()
+    {
+        $namakategori = $this->request->getVar('namakategori');
+
+        $validation = \config\Services::validation();
+
+        $valid = $this->validate([
+            'namakategori' => [
+                'rules' => 'required',
+                'label' => 'Nama Kategori',
+                'errors' => [
+                    'required' => '{field} tidak boleh kosong'
+                ]
+            ]
+        ]);
+
+        if (!$valid) {
+            $pesan = [
+                'errorNamaKategori' => '<br><div class="alert alert-danger">' . $validation->getError() . '</div>'
+            ];
+
+            session()->setFlashdata($pesan);
+            return redirect()->to('/kategori/formtambah');
+
+        $tombolcari = $this->request->getPost('tombolcari');
+
+        if(isset($tombolcari)){
+            $cari = $this->request->getPost('cari');
+            session()->set('cari_kategori', $cari);
+            redirect()->to('/kategori/index');
+
         }else{
             $cari = session()->get('cari_kategori');
         }
