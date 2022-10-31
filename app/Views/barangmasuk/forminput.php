@@ -70,6 +70,37 @@ Input Barang Masuk
      </button>
     </div>
   </div>
+
+  <div class="row" id="tampilDataTemp"></div>
   </div>
 </div>
+<script>
+  function dataTemp(){
+    let faktur = $('#faktur').val();
+
+    $.ajax({
+      type: "post",
+      url: "/barangmasuk/dataTemp",
+      data: {
+        faktur : faktur
+      },
+      dataType: "json",
+      success: function (response) {
+        if(response.data){
+          $('#tampilDataTemp').html(response.data);
+        }
+      },
+      error : function(xhr,ajaxOptions,thrownError){
+        alert(xhr.status + '\n' + thrownError);
+      }
+    });
+  }
+$(document).ready(function () {
+  dataTemp();
+});
+</script>
+
+  </div>
+</div>
+
 <?= $this->endSection('isi') ?>

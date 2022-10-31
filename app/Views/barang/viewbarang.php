@@ -18,12 +18,18 @@ Ini Adalah Judul Barang
 
 <?= session()->getFlashdata('error'); ?>
 <?= session()->getFlashdata('sukses'); ?>
+
+<?= form_open('barang/index') ?>
+<div class="input-group mb-3">
+    <input type="text" class="form-control" placeholder="Cari data berdasarkan Kode, Nama Barang & Kategori" name="cari" autofocus value="<?= $cari?>">
+
 <?= form_open('barang/index') ?>
 <div class="input-group mb-3">
     <input type="text" class="form-control" placeholder="Cari data berdasarkan Kode, Nama Barang & Kategori" name="cari" autofocus value="<?= $cari?>">
 
 
     <input type="text" class="form-control" placeholder="Cari data berdasarkan Kode, Nama Barang & Kategori" name="cari" autofocus>
+
 
 
     <div class="input-group-append">
@@ -36,6 +42,8 @@ Ini Adalah Judul Barang
 
 
 
+
+
 <span class="badge badge-success">
     <h5>
         <?= "Total Data : $totaldata"; ?>
@@ -43,10 +51,9 @@ Ini Adalah Judul Barang
 </span>
 <br>
 
+
 <?= session()->getFlashdata('error'); ?>
 <?= session()->getFlashdata('sukses'); ?>
-
-
 
 
 
@@ -66,6 +73,9 @@ Ini Adalah Judul Barang
 
     <tbody>
         <?php
+
+        $nomor = 1 + (($nohalaman - 1) * 10);
+        foreach ($tampildata as $row) :
 
         $nomor = 1 + (($nohalaman - 1) * 10);
         foreach ($tampildata as $row) :
@@ -124,9 +134,17 @@ Ini Adalah Judul Barang
         <?php endforeach; ?>
     </tbody>
 </table>
+
 <div class="float-left mt-4">
     <?= $pager->links('barang','paging') ?>
 </div>
+
+
+
+<div class="float-left mt-4">
+    <?= $pager->links('barang','paging') ?>
+</div>
+
 <script>
     function edit(kode) {
         window.location.href = ('/barang/edit/' + kode);
@@ -135,6 +153,10 @@ Ini Adalah Judul Barang
     function hapus(kode) {
         pesan = confirm('Yakin data barang ini dihapus ?');
         if (pesan) {
+
+            return true;
+        } else {
+
             return true;
         } else {
 
@@ -142,13 +164,14 @@ Ini Adalah Judul Barang
             return true;
         }else{
 
+
             return false;
         }
     }
 </script>
 
 <?= $this->endSection('isi') ?>
-=======
+
 <?= $this->endSection('isi') ?>
 
 
