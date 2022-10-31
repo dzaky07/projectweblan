@@ -13,8 +13,10 @@ Ini Adalah Judul Barang
 <?= $this->endSection('subjudul') ?>
 
 <?= $this->section('isi') ?>
+
 <?= session()->getFlashdata('error'); ?>
 <?= session()->getFlashdata('sukses'); ?>
+<<<<<<< HEAD
 <?= form_open('barang/index') ?>
 <div class="input-group mb-3">
     <input type="text" class="form-control" placeholder="Cari data berdasarkan Kode, Nama Barang & Kategori" name="cari" autofocus value="<?= $cari?>">
@@ -31,6 +33,12 @@ Ini Adalah Judul Barang
     </h5>
 </span>
 <br>
+=======
+
+
+
+
+>>>>>>> 6006be1e287d8688a769c154c17db7eed62adc49
 <table class="table table-striped table-bordered" style="width:100%;">
     <thead>
         <tr>
@@ -54,6 +62,7 @@ Ini Adalah Judul Barang
                 <td><?= $row['brgkode']; ?></td>
                 <td><?= $row['brgnama']; ?></td>
                 <td><?= $row['katnama']; ?></td>
+
                 <td><?= number_format($row['brgharga'], 0); ?></td>
                 <td><?= number_format($row['brgstok'], 0); ?></td>
                 <td>
@@ -70,15 +79,25 @@ Ini Adalah Judul Barang
                         </button>
                     </form>
 
+
+                <td><?= number_format($row['brgharga'],0); ?></td>
+                <td><?= number_format($row['brgstok'],0); ?></td>
+                <td>
+
+
                 </td>
             </tr>
 
         <?php endforeach; ?>
     </tbody>
 </table>
+<<<<<<< HEAD
 <div class="float-left mt-4">
     <?= $pager->links('barang','paging') ?>
 </div>
+=======
+
+>>>>>>> 6006be1e287d8688a769c154c17db7eed62adc49
 <script>
     function edit(kode) {
         window.location.href = ('/barang/edit/' + kode);
@@ -94,3 +113,8 @@ Ini Adalah Judul Barang
     }
 </script>
 <?= $this->endSection('isi') ?>
+
+
+
+<?= $this->endSection('isi') ?>
+
