@@ -14,9 +14,26 @@ class Barang extends BaseController
     }
     public function index()
     {
-        $data = [
-            'tampildata' => $this->barang->tampildata()
+        $tombolcari = $this->request->getPost('tombolcari');
 
+        if (isset($tombolcari)) {
+            $cari = $this->request->getPost('cari');
+            session()->set('cari_barang', $cari);
+            redirect()->to('/barang/index');
+        } else {
+            $cari = session()->get('cari_barang');
+        }
+        $totaldata = $cari ? $this->barang->tampildata_cari($cari)->countAllResults() : $this->barang->tampildata()->countAllResults();
+        
+        $dataBarang = $cari ? $this->barang->tampildata_cari($cari)->paginate(10, 'barang') : $this->barang->tampildata()->paginate(10, 'barang');
+
+        $nohalaman = $this->request->getVar('page_barang') ? $this->request->getVar('page_barang') : 1;
+        $data = [
+            'tampildata' => $dataBarang,
+            'pager' => $this->barang->pager,
+            'nohalaman' => $nohalaman,
+            'totaldata' => $totaldata,
+            'cari' => $cari,
         ];
         return view('barang/viewbarang', $data);
     }
@@ -118,12 +135,12 @@ class Barang extends BaseController
                 'brgstok' => $stok,
                 'brggambar' => $pathGambar
             ]);
-            
+
             $pesan_sukses = [
                 'sukses' => '<div class="alert alert-success alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
                 <h5><i class="icon fas fa-check"></i> Berhasil !</h5>
-                Data Barang dengan kode <strong>'. $kodebarang .'</strong> berhasil disimpan
+                Data Barang dengan kode <strong>' . $kodebarang . '</strong> berhasil disimpan
                 </div>'
             ];
 
@@ -136,7 +153,7 @@ class Barang extends BaseController
     {
         $cekData = $this->barang->find($kode);
 
-        if($cekData){
+        if ($cekData) {
 
             $modelkategori = new Modelkategori();
 
@@ -150,8 +167,7 @@ class Barang extends BaseController
                 'gambar' => $cekData['brggambar']
             ];
             return view('barang/formedit', $data);
-
-        }else{
+        } else {
             $pesan_error = [
                 'error' => '<div class="alert alert-danger alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
@@ -164,7 +180,8 @@ class Barang extends BaseController
             return redirect()->to('/barang/index');
         }
     }
-    public function updatedata(){
+    public function updatedata()
+    {
         $kodebarang = $this->request->getVar('kodebarang');
         $namabarang = $this->request->getVar('namabarang');
         $kategori = $this->request->getVar('kategori');
@@ -228,8 +245,8 @@ class Barang extends BaseController
             $gambar = $_FILES['gambar']['name'];
 
             if ($gambar != NULL) {
-                ($pathGambarLama== '' || $pathGambarLama==null) ? '' :   unlink($pathGambarLama);
-              
+                ($pathGambarLama == '' || $pathGambarLama == null) ? '' :   unlink($pathGambarLama);
+
                 $namaFileGambar = $kodebarang;
                 $fileGambar = $this->request->getFile('gambar');
                 $fileGambar->move('upload', $namaFileGambar . '.' . $fileGambar->getExtension());
@@ -239,30 +256,31 @@ class Barang extends BaseController
                 $pathGambar = $pathGambarLama;
             }
 
-            $this->barang->update($kodebarang,[
+            $this->barang->update($kodebarang, [
                 'brgnama' => $namabarang,
                 'brgkatid' => $kategori,
                 'brgharga' => $harga,
                 'brgstok' => $stok,
                 'brggambar' => $pathGambar
             ]);
-            
+
             $pesan_sukses = [
                 'sukses' => '<div class="alert alert-success alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
                 <h5><i class="icon fas fa-check"></i> Berhasil !</h5>
-                Data Barang dengan kode <strong>'. $kodebarang .'</strong> berhasil diupdate
+                Data Barang dengan kode <strong>' . $kodebarang . '</strong> berhasil diupdate
                 </div>'
             ];
 
             session()->setFlashdata($pesan_sukses);
             return redirect()->to('/barang/index');
-        }     
+        }
     }
-    public function hapus($kode){
+    public function hapus($kode)
+    {
         $cekData = $this->barang->find($kode);
 
-        if($cekData){
+        if ($cekData) {
 
             $pathGambarLama = $cekData['brggambar'];
             unlink($pathGambarLama);
@@ -271,14 +289,13 @@ class Barang extends BaseController
                 'sukses' => '<div class="alert alert-success alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
                 <h5><i class="icon fas fa-check"></i> Berhasil !</h5>
-                Data Barang dengan kode <strong>'. $kode .'</strong> berhasil dihapus
+                Data Barang dengan kode <strong>' . $kode . '</strong> berhasil dihapus
                 </div>'
             ];
 
             session()->setFlashdata($pesan_sukses);
             return redirect()->to('/barang/index');
-
-        }else{
+        } else {
             $pesan_error = [
                 'error' => '<div class="alert alert-danger alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
@@ -290,5 +307,5 @@ class Barang extends BaseController
             session()->setFlashdata($pesan_error);
             return redirect()->to('/barang/index');
         }
-    }       
+    }
 }
