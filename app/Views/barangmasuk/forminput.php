@@ -70,6 +70,7 @@ Input Barang Masuk
      </button>
     </div>
   </div>
+
   <div class="row" id="tampilDataTemp"></div>
   </div>
 </div>
@@ -98,4 +99,8 @@ $(document).ready(function () {
   dataTemp();
 });
 </script>
+
+  </div>
+</div>
+
 <?= $this->endSection('isi') ?>

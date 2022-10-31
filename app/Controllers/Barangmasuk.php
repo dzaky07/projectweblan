@@ -3,7 +3,9 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+
 use App\Models\Modeltempbarangmasuk;
+
 
 class Barangmasuk extends BaseController
 {
@@ -11,6 +13,7 @@ class Barangmasuk extends BaseController
     {
         return view('barangmasuk/forminput');
     }
+
 
     function dataTemp(){
         if($this->request->isAJAX()){

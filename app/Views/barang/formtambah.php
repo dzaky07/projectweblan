@@ -19,10 +19,12 @@ Form Tambah Barang
 <div class="form-group row">
   <label for="" class="col-sm-4 col-form-label">Kode Barang</label>
   <div class="col-sm-8">
+    <input type="Text" class="form-control" id="kodebarang" name="kodebarang" autofocus>
 
     <input type="Text" class="form-control" id="kodebarang" name="kodebarang" autofocus>
 
     <input type="Text" class="form-control" id="Kodebarang" name="kodebarang" autofocus>
+
 
   </div>
 </div>

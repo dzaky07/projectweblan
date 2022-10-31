@@ -15,4 +15,5 @@ class Modeltempbarangmasuk extends Model
     public function tampilDataTemp($faktur){
         return $this->table('temp_barangmasuk')->join('barang','brgkode=detbrgkode')->where(['detfaktur' => $faktur])->get();
     }
+
 }
