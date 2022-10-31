@@ -73,7 +73,7 @@
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-                        <li class="nav-header">Data Master</li>
+               <li class="nav-header">Data Master</li>
                         <li class="nav-item">
                             <a href="<?= site_url('kategori/index'); ?>" class="nav-link">
                                 <i class="nav-icon fa fa-chevron-circle-right text-success"></i>
@@ -84,6 +84,13 @@
                             <a href="<?= site_url('barang/index'); ?>" class="nav-link">
                                 <i class="nav-icon fa fa-chevron-circle-right text-primary"></i>
                                 <p class="text">Data Barang</p>
+                            </a>
+                        </li>
+                        <li class="nav-header">Transaksi</li>
+                        <li class="nav-item">
+                            <a href="<?= site_url('barangmasuk/index'); ?>" class="nav-link">
+                                <i class="nav-icon fa fa-arrow-circle-down text-primary"></i>
+                                <p class="text">Barang Masuk</p>
                             </a>
                         </li>
                     </ul>
@@ -146,7 +153,7 @@
             <div class="float-right d-none d-sm-block">
                 <b>Version</b> Alpha
             </div>
-            <strong>Copyright &copy; Ade Putra Maghribi
+            Sistem Informasi Gudang Barang Elektronik
         </footer>
 
         <!-- Control Sidebar -->
