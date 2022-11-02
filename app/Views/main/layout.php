@@ -12,6 +12,11 @@
     <link rel="stylesheet" href="<?= base_url() ?>/plugins/fontawesome-free/css/all.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="<?= base_url() ?>/dist/css/adminlte.min.css">
+    <!-- jQuery -->
+    <script src="<?= base_url() ?>/plugins/jquery/jquery.min.js"></script>
+    
+    <link rel="stylesheet" href="<?= base_url() ?>/plugins/sweetalert2/sweetalert2.min.css">
+    <script src="<?= base_url() ?>/plugins/sweetalert2/sweetalert2.all.min.js"></script>
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -73,7 +78,7 @@
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-                        <li class="nav-header">Data Master</li>
+               <li class="nav-header">Data Master</li>
                         <li class="nav-item">
                             <a href="<?= site_url('kategori/index'); ?>" class="nav-link">
                                 <i class="nav-icon fa fa-chevron-circle-right text-success"></i>
@@ -84,6 +89,13 @@
                             <a href="<?= site_url('barang/index'); ?>" class="nav-link">
                                 <i class="nav-icon fa fa-chevron-circle-right text-primary"></i>
                                 <p class="text">Data Barang</p>
+                            </a>
+                        </li>
+                        <li class="nav-header">Transaksi</li>
+                        <li class="nav-item">
+                            <a href="<?= site_url('barangmasuk/index'); ?>" class="nav-link">
+                                <i class="nav-icon fa fa-arrow-circle-down text-primary"></i>
+                                <p class="text">Barang Masuk</p>
                             </a>
                         </li>
                     </ul>
@@ -157,8 +169,7 @@
     </div>
     <!-- ./wrapper -->
 
-    <!-- jQuery -->
-    <script src="<?= base_url() ?>/plugins/jquery/jquery.min.js"></script>
+
     <!-- Bootstrap 4 -->
     <script src="<?= base_url() ?>/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
