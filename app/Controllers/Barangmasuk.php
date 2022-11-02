@@ -7,6 +7,7 @@ use App\Models\Modelbarang;
 use App\Models\Modeltempbarangmasuk;
 use CodeIgniter\HTTP\Request;
 
+
 class Barangmasuk extends BaseController
 {
     public function index()
@@ -17,6 +18,7 @@ class Barangmasuk extends BaseController
     function dataTemp()
     {
         if ($this->request->isAJAX()) {
+
             $faktur = $this->request->getPost('faktur');
 
             $modelTemp = new Modeltempbarangmasuk();
@@ -87,6 +89,7 @@ class Barangmasuk extends BaseController
             ];
             echo json_encode($json);
         } else {
+
             exit('Maaf tidak bisa dipanggil');
         }
     }
@@ -103,6 +106,12 @@ class Barangmasuk extends BaseController
             ];
             echo json_encode($json);
         } else {
+
+                'data'=> view('barangmasuk/datatemp', $data)
+            ];
+            echo json_encode($json);
+        }else{
+
             exit('Maaf tidak bisa dipanggil');
         }
     }
