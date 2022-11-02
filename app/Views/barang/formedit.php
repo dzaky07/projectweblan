@@ -3,8 +3,6 @@
 <?= $this->section('judul') ?>
 Form Edit Barang
 
-
-
 <?= $this->endSection('judul') ?>
 
 <?= $this->section('subjudul') ?>
@@ -18,11 +16,8 @@ Form Edit Barang
 <?= $this->section('isi') ?>
 <?= form_open_multipart('barang/updatedata') ?>
 
-
-
-<?= form_open_multipart('barang/updatedata') ?>
-
 <?= form_open_multipart('barang/simpandata') ?>
+
 
 <?= session()->getFlashdata('error'); ?>
 <?= session()->getFlashdata('sukses'); ?>
@@ -31,11 +26,8 @@ Form Edit Barang
   <div class="col-sm-8">
     <input type="Text" class="form-control" id="kodebarang" name="kodebarang" readonly value="<?= $kodebarang; ?>">
 
-
-
-    <input type="Text" class="form-control" id="kodebarang" name="kodebarang" readonly value="<?= $kodebarang; ?>">
-
     <input type="Text" class="form-control" id="kodebarang" name="kodebarang" autofocus>
+
 
   </div>
 </div>
@@ -43,9 +35,6 @@ Form Edit Barang
 <div class="form-group row">
   <label for="" class="col-sm-4 col-form-label">Nama Barang</label>
   <div class="col-sm-8">
-    <input type="Text" class="form-control" id="namabarang" name="namabarang" value="<?= $namabarang; ?>">
-
-
     <input type="Text" class="form-control" id="namabarang" name="namabarang" value="<?= $namabarang; ?>">
 
     <input type="Text" class="form-control" id="namabarang" name="namabarang">
@@ -76,6 +65,7 @@ Form Edit Barang
         
         <?php endif; ?>
         <?php endforeach; ?>
+
       
       <option selected value="">=Pilih=</option>
       <?php foreach ($datakategori as $kat) : ?>
@@ -94,6 +84,7 @@ Form Edit Barang
 
 
 
+
     <input type="number" class="form-control" id="harga" name="harga" value="<?= $harga; ?>">
 
     <input type="number" class="form-control" id="harga" name="harga">
@@ -105,9 +96,6 @@ Form Edit Barang
 <div class="form-group row">
   <label for="" class="col-sm-4 col-form-label">Stok</label>
   <div class="col-sm-4">
-
-
-
 
     <input type="number" class="form-control" id="stok" name="stok" value="<?= $stok; ?>">
   </div>
@@ -121,13 +109,11 @@ Form Edit Barang
     <input type="number" class="form-control" id="stok" name="stok">
 
 
+
   </div>
 </div>
 
 <div class="form-group row">
-  <label for="" class="col-sm-4 col-form-label">Upload Gambar (<i>Jika diganti..</i>)</label>
-
-
   <label for="" class="col-sm-4 col-form-label">Upload Gambar (<i>Jika diganti..</i>)</label>
 
   <label for="" class="col-sm-4 col-form-label">Upload Gambar (<i>Optional</i>)</label>

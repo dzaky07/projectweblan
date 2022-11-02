@@ -13,9 +13,6 @@ Ini Adalah Judul Barang
 <?= $this->endSection('subjudul') ?>
 
 <?= $this->section('isi') ?>
-
-
-
 <?= session()->getFlashdata('error'); ?>
 <?= session()->getFlashdata('sukses'); ?>
 
@@ -26,7 +23,6 @@ Ini Adalah Judul Barang
 <?= form_open('barang/index') ?>
 <div class="input-group mb-3">
     <input type="text" class="form-control" placeholder="Cari data berdasarkan Kode, Nama Barang & Kategori" name="cari" autofocus value="<?= $cari?>">
-
 
     <input type="text" class="form-control" placeholder="Cari data berdasarkan Kode, Nama Barang & Kategori" name="cari" autofocus>
 
@@ -40,10 +36,6 @@ Ini Adalah Judul Barang
 </div>
 <?= form_close(); ?>
 
-
-
-
-
 <span class="badge badge-success">
     <h5>
         <?= "Total Data : $totaldata"; ?>
@@ -52,8 +44,10 @@ Ini Adalah Judul Barang
 <br>
 
 
+
 <?= session()->getFlashdata('error'); ?>
 <?= session()->getFlashdata('sukses'); ?>
+
 
 
 
@@ -73,9 +67,9 @@ Ini Adalah Judul Barang
 
     <tbody>
         <?php
-
         $nomor = 1 + (($nohalaman - 1) * 10);
         foreach ($tampildata as $row) :
+
 
         $nomor = 1 + (($nohalaman - 1) * 10);
         foreach ($tampildata as $row) :
@@ -111,7 +105,7 @@ Ini Adalah Judul Barang
                         </button>
                     </form>
 
-                <td><?= number_format($row['brgharga'],0); ?></td>
+              <td><?= number_format($row['brgharga'],0); ?></td>
                 <td><?= number_format($row['brgstok'],0); ?></td>
 
                 <td>
@@ -127,7 +121,6 @@ Ini Adalah Judul Barang
                             <i class="fa fa-trash-alt"></i>
                         </button>
                     </form>
-
                 </td>
             </tr>
 
@@ -160,9 +153,11 @@ Ini Adalah Judul Barang
             return true;
         } else {
 
+
         if(pesan){
             return true;
         }else{
+
 
 
             return false;
@@ -172,7 +167,8 @@ Ini Adalah Judul Barang
 
 <?= $this->endSection('isi') ?>
 
+
 <?= $this->endSection('isi') ?>
 
-
+<?= $this->endSection('isi') ?>
 

@@ -25,6 +25,7 @@ Input Barang Masuk
 </div>
 
 <div class="card">
+
     <div class="form-group col-md-6">
         <label for="">Input Faktur Barang Masuk</label>
       <input type="text" class="form-control" placeholder="No.Faktur" name="faktur" id="faktur">
@@ -36,6 +37,7 @@ Input Barang Masuk
   </div>
 
   <div class="card">
+
   <div class="card-header bg-primary">
     Input Barang
   </div>
@@ -85,6 +87,7 @@ Input Barang Masuk
 </div>
 <script>
   function dataTemp() {
+
   <div class="form-row">
     <div class="form-group col-md-3">
         <label for="">Kode Barang</label>
@@ -132,6 +135,7 @@ Input Barang Masuk
 </div>
 <script>
   function dataTemp(){
+
     let faktur = $('#faktur').val();
 
     $.ajax({
@@ -147,6 +151,7 @@ Input Barang Masuk
         }
       },
       error: function(xhr, ajaxOptions, thrownError) {
+
         faktur : faktur
       },
       dataType: "json",
@@ -156,16 +161,23 @@ Input Barang Masuk
         }
       },
       error : function(xhr,ajaxOptions,thrownError){
+
         alert(xhr.status + '\n' + thrownError);
       }
     });
   }
+
   function kosong() {
     $('#kdbarang').val('');
     $('#namabarang').val('');
     $('#hargajual').val('');
+
+    $('#hargabeli').val('');
+    $('#jumlah').val('');
+
     $('#hargabeli').val();
     $('#jumlah').val();
+
     $('#kdbarang').focus();
   }
   $(document).ready(function() {
@@ -214,6 +226,34 @@ Input Barang Masuk
       let hargajual = $('#hargajual').val();
 
       if (faktur.length == 0) {
+
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Maaf, Faktur tidak boleh kosong',
+          })
+      } else if (kodebarang.length == 0) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Maaf, kode barang tidak boleh kosong',
+          })
+        //alert('Maaf, kode barang tidak boleh kosong');
+      } else if (hargabeli.length == 0) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Maaf, Harga Beli tidak boleh kosong',
+          })
+        //alert('Maaf, Harga Beli tidak boleh kosong');
+      } else if (jumlah.length == 0) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Maaf, Jumlah tidak boleh kosong',
+          })
+        //alert('Maaf, Jumlah tidak boleh kosong');
+
         alert('Maaf, faktur wajib diisi');
       } else if (kodebarang.length == 0) {
         alert('Maaf, kode barang tidak boleh kosong');
@@ -221,6 +261,7 @@ Input Barang Masuk
         alert('Maaf, Harga Beli tidak boleh kosong');
       } else if (jumlah.length == 0) {
         alert('Maaf, Jumlah tidak boleh kosong');
+
       } else {
         $.ajax({
           type: "post",
@@ -246,6 +287,15 @@ Input Barang Masuk
         });
       }
     });
+
+
+    $('#tombolReload').click(function (e) {
+      e.preventDefault();
+      dataTemp();
+    });
+  });
+</script>
+
   });
 </script>
 $(document).ready(function () {

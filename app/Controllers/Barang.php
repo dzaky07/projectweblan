@@ -10,7 +10,6 @@ class Barang extends BaseController
 {
     public function __construct()
     {
-
         $this->barang = new Modelbarang();
 
 
@@ -571,8 +570,6 @@ class Barang extends BaseController
     }
 
 
-
-
     public function simpandata()
     {
         $kodebarang = $this->request->getVar('kodebarang');
@@ -787,13 +784,11 @@ class Barang extends BaseController
                 $pathGambar ='upload/'.$fileGambar->getName();
             }else{
 
+
                 $pathGambar = '';
             }
 
             $this->barang->insert([
-
-
-
 
                 'brgkode' => $kodebarang,
                 'brgnama' => $namabarang,
@@ -931,14 +926,6 @@ class Barang extends BaseController
                 'brgharga' => $harga,
                 'brgstok' => $stok,
                 'brggambar' => $pathGambar
-
-                'brgkode' =>$kodebarang,
-                'brgnama' =>$namabarang,
-                'brgkatid'=>$kategori,
-                'brgharga' =>$harga,
-                'brgstok'=>$stok,
-                'brggambar' =>$pathGambar
-
             ]);
 
             $pesan_sukses = [
@@ -1161,5 +1148,6 @@ class Barang extends BaseController
             session()->setFlashdata($pesan_error);
             return redirect()->to('/barang/index');
         }
+
     }
 }
