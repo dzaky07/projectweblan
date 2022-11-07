@@ -90,9 +90,9 @@ class Barangmasuk extends BaseController
             exit('Maaf tidak bisa dipanggil');
         }
     }
-
     function hapus()
     {
+    function hapus(){
         if ($this->request->isAJAX()) {
             $id = $this->request->getPost('id');
 
@@ -113,6 +113,8 @@ class Barangmasuk extends BaseController
         if ($this->request->isAJAX()) {
             $json = [
                 'data' => view('barangmasuk/modalcaribarang')
+
+                'data'=> view('barangmasuk/datatemp', $data)
             ];
 
             echo json_encode($json);
@@ -140,6 +142,7 @@ class Barangmasuk extends BaseController
                 echo json_encode($json);
             }
         } else {
+        }else{
             exit('Maaf tidak bisa dipanggil');
         }
     }

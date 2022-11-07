@@ -19,3 +19,31 @@ class Modelbarang extends Model
         return $this->table('barang')->join('kategori', 'brgkatid=katid')->orlike('brgkode', $cari)->orlike('brgnama', $cari)->orlike('katnama', $cari);
     }
 }
+}
+
+    }
+
+    public function tampildata_cari($cari){
+        return $this->table('barang')->join('kategori', 'brgkatid=katid')->orlike('brgkode', $cari)->orlike('brgnama', $cari)->orlike('katnama', $cari);
+    }
+
+}
+
+
+}
+}
+        return $this->table('barang')->join('kategori', 'brgkatid=katid')->get();
+
+    }
+
+    public function tampildata_cari($cari){
+        return $this->table('barang')->join('kategori', 'brgkatid=katid')->orlike('brgkode', $cari)->orlike('brgnama', $cari)->orlike('katnama', $cari);
+    }
+
+}
+
+
+}
+
+}
+
