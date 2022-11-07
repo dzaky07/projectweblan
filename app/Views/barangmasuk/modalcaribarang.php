@@ -39,6 +39,12 @@
                 $('.viewdetaildata').html('<i class="fa fa-spin fa-spinner"></i>');
             },
 
+
+            beforeSend : function(){
+                $('.viewdetaildata').html('<i class="fa fa-spin fa-spinner"></i>');
+            },
+
+
             success: function(response) {
                 if (response.data) {
                     $('.viewdetaildata').html(response.data);
@@ -55,6 +61,8 @@
             e.preventDefault();
             cariDataBarang();
         });
+
+
 
 
         $('#cari').keydown(function (e) { 
