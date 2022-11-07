@@ -38,6 +38,7 @@ Input Barang Masuk
             <button class="btn btn-outline-primary" type="button" id="tombolCariBarang">
               <i class="fa fa-search"></i>
 
+<<<<<<< HEAD
             </button>
           </div>
         </div>
@@ -70,6 +71,41 @@ Input Barang Masuk
       </div>
     </div>
     <div class="row" id="tampilDataTemp"></div>
+=======
+    </button>
+  </div>
+</div>
+    </div>
+    <div class="form-group col-md-3">
+    <label for="">Nama Barang</label>
+      <input type="Text" class="form-control" name="namabarang" id="namabarang" readonly>
+    </div>
+    <div class="form-group col-md-2">
+    <label for="">Harga Jual</label>
+      <input type="Text" class="form-control" name="hargajual" id="hargajual" readonly>
+    </div>
+    <div class="form-group col-md-2">
+    <label for="">Harga Beli</label>
+      <input type="number" class="form-control" name="hargabeli" id="hargabeli">
+    </div>
+    <div class="form-group col-md-1">
+    <label for="">Jumlah</label>
+      <input type="number" class="form-control" name="jumlah" id="jumlah">
+    </div>
+    <div class="form-group col-md-1">
+    <label for="">Aksi</label>
+    <div class="input-group"></div>
+     <button type="button" class="btn btn -sm btn-info" title="tambah item" id="tombolTambahItem">
+        <i class="fa fa-plus-square"></i>
+     </button>
+     <button type="button" class="btn btn -sm btn-warning" title="Releod Data" id="tombolReload">
+        <i class="fa fa-sync-alt"></i>
+     </button>
+    </div>
+  </div>
+
+  <div class="row" id="tampilDataTemp"></div>
+>>>>>>> ab1a9029e4c436139049007ae48dfbc6eae64c70
   </div>
 </div>
 <div class="modalcaribarang" style="display: none;"></div>
@@ -227,4 +263,8 @@ $.ajax({
     });
   });
 </script>
+
+  </div>
+</div>
+
 <?= $this->endSection('isi') ?>

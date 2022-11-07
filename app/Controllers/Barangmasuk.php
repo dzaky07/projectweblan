@@ -3,9 +3,14 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+<<<<<<< HEAD
 use App\Models\Modelbarang;
+=======
+
+>>>>>>> ab1a9029e4c436139049007ae48dfbc6eae64c70
 use App\Models\Modeltempbarangmasuk;
 use CodeIgniter\HTTP\Request;
+
 
 class Barangmasuk extends BaseController
 {
@@ -14,9 +19,15 @@ class Barangmasuk extends BaseController
         return view('barangmasuk/forminput');
     }
 
+<<<<<<< HEAD
     function dataTemp()
     {
         if ($this->request->isAJAX()) {
+=======
+
+    function dataTemp(){
+        if($this->request->isAJAX()){
+>>>>>>> ab1a9029e4c436139049007ae48dfbc6eae64c70
             $faktur = $this->request->getPost('faktur');
 
             $modelTemp = new Modeltempbarangmasuk();

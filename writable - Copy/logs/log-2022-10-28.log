@@ -1,0 +1,9 @@
+CRITICAL - 2022-10-28 01:37:00 --> unlink(): Invalid argument
+in APPPATH\Controllers\Barang.php on line 286.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'unlink(): Invalid argument', 'APPPATH\\Controllers\\Barang.php', 286)
+ 2 APPPATH\Controllers\Barang.php(286): unlink('ROOTPATH\\public')
+ 3 SYSTEMPATH\CodeIgniter.php(907): App\Controllers\Barang->hapus('45612')
+ 4 SYSTEMPATH\CodeIgniter.php(457): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Barang))
+ 5 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Commands\Server\rewrite.php(43): require_once('FCPATH\\index.php')

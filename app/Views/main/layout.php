@@ -158,7 +158,7 @@
             <div class="float-right d-none d-sm-block">
                 <b>Version</b> Alpha
             </div>
-            <strong>Copyright &copy; Ade Putra Maghribi
+            Sistem Informasi Gudang Barang Elektronik
         </footer>
 
         <!-- Control Sidebar -->
