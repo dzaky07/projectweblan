@@ -47,7 +47,6 @@ class Barang extends BaseController
         $data = [
             'datakategori' => $modelkategori->findAll(),
 
-
         $this->barang = new Modelbarang();
     }
     public function index()
@@ -218,7 +217,6 @@ class Barang extends BaseController
             return redirect()->to('/barang/index');
         }
     }
-
     public function updatedata()
     {
 

@@ -25,7 +25,6 @@ Input Barang Masuk
 </div>
 
 <div class="card">
-
     <div class="form-group col-md-6">
         <label for="">Input Faktur Barang Masuk</label>
       <input type="text" class="form-control" placeholder="No.Faktur" name="faktur" id="faktur">
@@ -37,7 +36,6 @@ Input Barang Masuk
   </div>
 
   <div class="card">
-
   <div class="card-header bg-primary">
     Input Barang
   </div>
@@ -46,9 +44,9 @@ Input Barang Masuk
       <div class="form-group col-md-3">
         <label for="">Kode Barang</label>
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Kode Barang" name="kodebarang" id="kdbarang">
+          <input type="text" class="form-control" placeholder="Kode Barang" name="kdbarang" id="kdbarang">
           <div class="input-group-append">
-            <button class="btn btn-outline-primary" type="button" id="button" id="tombolCariBarang">
+            <button class="btn btn-outline-primary" type="button" id="tombolCariBarang">
               <i class="fa fa-search"></i>
 
             </button>
@@ -85,9 +83,9 @@ Input Barang Masuk
     <div class="row" id="tampilDataTemp"></div>
   </div>
 </div>
+<div class="modalcaribarang" style="display: none;"></div>
 <script>
   function dataTemp() {
-
   <div class="form-row">
     <div class="form-group col-md-3">
         <label for="">Kode Barang</label>
@@ -135,7 +133,6 @@ Input Barang Masuk
 </div>
 <script>
   function dataTemp(){
-
     let faktur = $('#faktur').val();
 
     $.ajax({
@@ -151,7 +148,6 @@ Input Barang Masuk
         }
       },
       error: function(xhr, ajaxOptions, thrownError) {
-
         faktur : faktur
       },
       dataType: "json",
@@ -161,7 +157,6 @@ Input Barang Masuk
         }
       },
       error : function(xhr,ajaxOptions,thrownError){
-
         alert(xhr.status + '\n' + thrownError);
       }
     });
@@ -171,13 +166,13 @@ Input Barang Masuk
     $('#kdbarang').val('');
     $('#namabarang').val('');
     $('#hargajual').val('');
-
+    $('#hargabeli').val('');
+    $('#jumlah').val('');
     $('#hargabeli').val('');
     $('#jumlah').val('');
 
     $('#hargabeli').val();
     $('#jumlah').val();
-
     $('#kdbarang').focus();
   }
   $(document).ready(function() {
@@ -226,7 +221,11 @@ Input Barang Masuk
       let hargajual = $('#hargajual').val();
 
       if (faktur.length == 0) {
-
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Maaf, Faktur tidak boleh kosong',
+        })
         Swal.fire({
             icon: 'error',
             title: 'Error',
@@ -256,12 +255,27 @@ Input Barang Masuk
 
         alert('Maaf, faktur wajib diisi');
       } else if (kodebarang.length == 0) {
-        alert('Maaf, kode barang tidak boleh kosong');
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Maaf, kode barang tidak boleh kosong',
+        })
+        //alert('Maaf, kode barang tidak boleh kosong');
       } else if (hargabeli.length == 0) {
-        alert('Maaf, Harga Beli tidak boleh kosong');
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Maaf, Harga Beli tidak boleh kosong',
+        })
+        //alert('Maaf, Harga Beli tidak boleh kosong');
       } else if (jumlah.length == 0) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Maaf, Jumlah tidak boleh kosong',
+        })
+        //alert('Maaf, Jumlah tidak boleh kosong');
         alert('Maaf, Jumlah tidak boleh kosong');
-
       } else {
         $.ajax({
           type: "post",
@@ -275,11 +289,11 @@ Input Barang Masuk
           },
           dataType: "json",
           success: function(response) {
-              if(response.sukses){
-                alert(response.sukses);
-                kosong();
-                dataTemp();
-              }
+            if (response.sukses) {
+              alert(response.sukses);
+              kosong();
+              dataTemp();
+            }
           },
           error: function(xhr, ajaxOptions, thrownError) {
             alert(xhr.status + '\n' + thrownError);
@@ -287,8 +301,6 @@ Input Barang Masuk
         });
       }
     });
-
-
     $('#tombolReload').click(function (e) {
       e.preventDefault();
       dataTemp();
@@ -302,8 +314,27 @@ $(document).ready(function () {
   dataTemp();
 });
 </script>
+    $('#tombolReload').click(function(e) {
+      e.preventDefault();
+      dataTemp();
+    });
 
-  </div>
-</div>
-
+    $('#tombolCariBarang').click(function (e){
+      e.preventDefault();
+      $.ajax({
+        url: "/barangmasuk/cariDataBarang",
+        dataType: "json",
+        success: function (response){
+          if(response.data){
+            $('.modalcaribarang').html(response.data).show();
+            $('#modalcaribarang').modal('show');
+          }
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            alert(xhr.status + '\n' + thrownError);
+          }
+      });
+    });
+  });
+</script>
 <?= $this->endSection('isi') ?>

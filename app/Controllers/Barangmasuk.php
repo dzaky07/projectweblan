@@ -7,7 +7,6 @@ use App\Models\Modelbarang;
 use App\Models\Modeltempbarangmasuk;
 use CodeIgniter\HTTP\Request;
 
-
 class Barangmasuk extends BaseController
 {
     public function index()
@@ -18,7 +17,6 @@ class Barangmasuk extends BaseController
     function dataTemp()
     {
         if ($this->request->isAJAX()) {
-
             $faktur = $this->request->getPost('faktur');
 
             $modelTemp = new Modeltempbarangmasuk();
@@ -89,11 +87,11 @@ class Barangmasuk extends BaseController
             ];
             echo json_encode($json);
         } else {
-
             exit('Maaf tidak bisa dipanggil');
         }
     }
-
+    function hapus()
+    {
     function hapus(){
         if ($this->request->isAJAX()) {
             $id = $this->request->getPost('id');
@@ -106,12 +104,45 @@ class Barangmasuk extends BaseController
             ];
             echo json_encode($json);
         } else {
+            exit('Maaf tidak bisa dipanggil');
+        }
+    }
+
+    function cariDataBarang()
+    {
+        if ($this->request->isAJAX()) {
+            $json = [
+                'data' => view('barangmasuk/modalcaribarang')
 
                 'data'=> view('barangmasuk/datatemp', $data)
             ];
-            echo json_encode($json);
-        }else{
 
+            echo json_encode($json);
+        } else {
+            exit('Maaf tidak bisa dipanggil');
+        }
+    }
+
+    function detailCariBarang()
+    {
+        if ($this->request->isAJAX()) {
+            $cari = $this->request->getPost('cari');
+
+            $modalBarang = new Modelbarang();
+
+            $data = $modalBarang->tampildata_cari($cari);
+
+            if($data != null){
+                $json = [
+                    'data' => view('barangmasuk/detaildatabarang', [
+                        'tampildata' => $data
+                    ])
+                ];
+
+                echo json_encode($json);
+            }
+        } else {
+        }else{
             exit('Maaf tidak bisa dipanggil');
         }
     }
