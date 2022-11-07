@@ -12,6 +12,14 @@
     <link rel="stylesheet" href="<?= base_url() ?>/plugins/fontawesome-free/css/all.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="<?= base_url() ?>/dist/css/adminlte.min.css">
+    <!-- jQuery -->
+    <script src="<?= base_url() ?>/plugins/jquery/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="<?= base_url() ?>/plugins/sweetalert2/sweetalert2.min.css">
+    <script src="<?= base_url() ?>/plugins/sweetalert2/sweetalert2.all.min.js"></script>
+
+    <link rel="stylesheet" href="<?= base_url() ?>/plugins/sweetalert2/sweetalert2.min.css">
+    <script src="<?= base_url() ?>/plugins/sweetalert2/sweetalert2.all.min.js"></script>
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -153,7 +161,7 @@
             <div class="float-right d-none d-sm-block">
                 <b>Version</b> Alpha
             </div>
-            Sistem Informasi Gudang Barang Elektronik
+            <strong>Copyright &copy; Ade Putra Maghribi
         </footer>
 
         <!-- Control Sidebar -->
@@ -164,8 +172,7 @@
     </div>
     <!-- ./wrapper -->
 
-    <!-- jQuery -->
-    <script src="<?= base_url() ?>/plugins/jquery/jquery.min.js"></script>
+
     <!-- Bootstrap 4 -->
     <script src="<?= base_url() ?>/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->

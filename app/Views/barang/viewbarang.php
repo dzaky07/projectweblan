@@ -14,18 +14,28 @@ Ini Adalah Judul Barang
 
 <?= $this->section('isi') ?>
 
+<?= session()->getFlashdata('error'); ?>
+<?= session()->getFlashdata('sukses'); ?>
+
+
 
 
 <?= session()->getFlashdata('error'); ?>
 <?= session()->getFlashdata('sukses'); ?>
+
+
 <?= form_open('barang/index') ?>
 <div class="input-group mb-3">
     <input type="text" class="form-control" placeholder="Cari data berdasarkan Kode, Nama Barang & Kategori" name="cari" autofocus value="<?= $cari?>">
 
 
+<?= session()->getFlashdata('error'); ?>
+<?= session()->getFlashdata('sukses'); ?>
+
+<?= form_open('barang/index') ?>
+<div class="input-group mb-3">
+    <input type="text" class="form-control" placeholder="Cari data berdasarkan Kode, Nama Barang & Kategori" name="cari" autofocus value="<?= $cari?>">
     <input type="text" class="form-control" placeholder="Cari data berdasarkan Kode, Nama Barang & Kategori" name="cari" autofocus>
-
-
     <div class="input-group-append">
         <button class="btn btn-outline-success" type="submit" name="tombolcari">
             <i class="fa fa-search"></i>
@@ -33,15 +43,14 @@ Ini Adalah Judul Barang
     </div>
 </div>
 <?= form_close(); ?>
-
-
-
 <span class="badge badge-success">
     <h5>
         <?= "Total Data : $totaldata"; ?>
     </h5>
 </span>
 <br>
+
+
 
 <?= session()->getFlashdata('error'); ?>
 <?= session()->getFlashdata('sukses'); ?>
@@ -50,6 +59,8 @@ Ini Adalah Judul Barang
 
 
 
+<?= session()->getFlashdata('error'); ?>
+<?= session()->getFlashdata('sukses'); ?>
 
 <table class="table table-striped table-bordered" style="width:100%;">
     <thead>
@@ -66,18 +77,10 @@ Ini Adalah Judul Barang
 
     <tbody>
         <?php
-
         $nomor = 1 + (($nohalaman - 1) * 10);
         foreach ($tampildata as $row) :
-
-
         $nomor = 1 + (($nohalaman - 1) * 10);
         foreach ($tampildata as $row) :
-
-        $nomor = 1;
-        foreach ($tampildata as $row) :
-        foreach ($tampildata->getResultArray() as $row) :
-
         ?>
             <tr>
                 <td><?= $nomor++; ?></td>
@@ -86,7 +89,6 @@ Ini Adalah Judul Barang
                 <td><?= $row['katnama']; ?></td>
                 <td><?= number_format($row['brgharga'], 0); ?></td>
                 <td><?= number_format($row['brgstok'], 0); ?></td>
-
                 <td>
 
                     <button type="button" class="btn btn-sm btn-info" onclick="edit('<?= $row['brgkode'] ?>')">
@@ -101,9 +103,12 @@ Ini Adalah Judul Barang
                         </button>
                     </form>
 
-                <td><?= number_format($row['brgharga'],0); ?></td>
-                <td><?= number_format($row['brgstok'],0); ?></td>
 
+                <td><?= number_format($row['brgharga'],0); ?></td>
+
+              <td><?= number_format($row['brgharga'],0); ?></td>
+
+                <td><?= number_format($row['brgstok'],0); ?></td>
                 <td>
 
                     <button type="button" class="btn btn-sm btn-info" onclick="edit('<?= $row['brgkode'] ?>')">
@@ -124,9 +129,28 @@ Ini Adalah Judul Barang
         <?php endforeach; ?>
     </tbody>
 </table>
+
 <div class="float-left mt-4">
     <?= $pager->links('barang','paging') ?>
 </div>
+
+
+<div class="float-left mt-4">
+    <?= $pager->links('barang','paging') ?>
+</div>
+
+
+
+<div class="float-left mt-4">
+    <?= $pager->links('barang','paging') ?>
+</div>
+
+
+
+<div class="float-left mt-4">
+    <?= $pager->links('barang','paging') ?>
+</div>
+
 <script>
     function edit(kode) {
         window.location.href = ('/barang/edit/' + kode);
@@ -137,19 +161,17 @@ Ini Adalah Judul Barang
         if (pesan) {
             return true;
         } else {
-
         if(pesan){
             return true;
         }else{
-
             return false;
         }
     }
 </script>
 
 <?= $this->endSection('isi') ?>
-=======
 <?= $this->endSection('isi') ?>
-
-
+<?= $this->endSection('isi') ?>
+<?= $this->endSection('isi') ?>
+<?= $this->endSection('isi') ?
 

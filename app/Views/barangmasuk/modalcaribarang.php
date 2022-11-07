@@ -34,9 +34,17 @@
                 cari: cari
             },
             dataType: "json",
+
             beforeSend : function(){
                 $('.viewdetaildata').html('<i class="fa fa-spin fa-spinner"></i>');
             },
+
+
+            beforeSend : function(){
+                $('.viewdetaildata').html('<i class="fa fa-spin fa-spinner"></i>');
+            },
+
+
             success: function(response) {
                 if (response.data) {
                     $('.viewdetaildata').html(response.data);
@@ -54,11 +62,15 @@
             cariDataBarang();
         });
 
+
+
+
         $('#cari').keydown(function (e) { 
             if(e.keyCode == '13') {
                 e.preventDefault();
                 cariDataBarang();
             }
         });
+
     });
 </script>
