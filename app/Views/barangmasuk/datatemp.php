@@ -15,6 +15,9 @@
         <?php
         $nomor = 1;
         foreach ($datatemp->getResultArray() as $row) :
+
+        $nomor = 1;
+        foreach ($datatemp->getResultArray() as $row) :
         ?>
             <tr>
                 <td><?= $nomor++; ?></td>
@@ -79,3 +82,74 @@
         })
     }
 </script>
+            $nomor = 1;
+            foreach($datatemp->getResultArray() as $row):
+
+        ?>
+            <tr>
+                <td><?= $nomor++; ?></td>
+                <td><?= $row['brgkode']; ?></td>
+                <td><?= $row['brgnama']; ?></td>
+                <td style="text-align: right;">
+                    <?= number_format($row['dethargajual'], 0, ",", ".") ?>
+                </td>
+                <td style="text-align: right;">
+                    <?= number_format($row['dethargamasuk'], 0, ",", ".") ?>
+                </td>
+                <td style="text-align: right;">
+                    <?= number_format($row['detjml'], 0, ",", ".") ?>
+                </td>
+                <td style="text-align: right;">
+                    <?= number_format($row['detsubtotal'], 0, ",", ".") ?>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-sm btn-outline-danger" onclick="hapusItem('<?= $row['iddetail'] ?>')">
+                        <i class="fa fa-trash-alt"></i>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+<script>
+    function hapusItem(id) {
+        Swal.fire({
+            title: 'Hapus Item',
+            text: "Anda yakin ingin menghapus item ini?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, Hapus'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "post",
+                    url: "/barangmasuk/hapus",
+                    data: {
+                        id: id
+                    },
+                    dataType: "json",
+                    success: function(response) {
+                        if (response.sukses) {
+                            dataTemp();
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Berhasil',
+                                text: response.sukses,
+                            });
+
+                        }
+                    },
+                    error: function(xhr, ajaxOptions, thrownError) {
+                        alert(xhr.status + '\n' + thrownError);
+                    }
+
+                });
+            }
+        })
+    }
+
+</script>
+
+</script>
+

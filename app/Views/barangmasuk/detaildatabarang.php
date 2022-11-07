@@ -1,3 +1,4 @@
+
 <table class="table table-sm table-striped">
     <thead>
         <tr>
@@ -38,3 +39,6 @@ function pilih(kode){
     $('#modalcaribarang').modal('hide');
 }
 </script>
+
+asdasdada
+
