@@ -11,4 +11,9 @@ class Modeldetailbarangmasuk extends Model
     protected $allowedFields    = [
         'detfaktur', 'detbrgkode','dethargamasuk','dethargajual','detjml','detsubtotal'
     ];
+
+    public function dataDetail($faktur){
+        return $this->table('detail_barangmasuk')->join('barang', 'brgkode=detbrgkode')->where('detfaktur', $faktur)->get
+        ();
+    }
 }

@@ -13,5 +13,7 @@ class Modelbarangmasuk extends Model
         'faktur', 'tglfaktur', 'totalharga'
     ];
 
-    
+    public function tampildata_cari($cari){
+        return $this->table('barangmasuk')->like('faktur', $cari);
+    }
 }

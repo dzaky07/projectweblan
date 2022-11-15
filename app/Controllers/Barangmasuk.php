@@ -5,8 +5,9 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\Modelbarang;
 use App\Models\Modeltempbarangmasuk;
+use App\Models\Modelbarangmasuk;
+use App\Models\Modeldetailbarangmasuk;
 use CodeIgniter\HTTP\Request;
-
 
 class Barangmasuk extends BaseController
 {
@@ -18,7 +19,6 @@ class Barangmasuk extends BaseController
     function dataTemp()
     {
         if ($this->request->isAJAX()) {
-
             $faktur = $this->request->getPost('faktur');
 
             $modelTemp = new Modeltempbarangmasuk();
@@ -89,12 +89,12 @@ class Barangmasuk extends BaseController
             ];
             echo json_encode($json);
         } else {
-
             exit('Maaf tidak bisa dipanggil');
         }
     }
 
-    function hapus(){
+    function hapus()
+    {
         if ($this->request->isAJAX()) {
             $id = $this->request->getPost('id');
 
@@ -106,13 +106,139 @@ class Barangmasuk extends BaseController
             ];
             echo json_encode($json);
         } else {
+            exit('Maaf tidak bisa dipanggil');
+        }
+    }
 
-                'data'=> view('barangmasuk/datatemp', $data)
+    function cariDataBarang()
+    {
+        if ($this->request->isAJAX()) {
+            $json = [
+                'data' => view('barangmasuk/modalcaribarang')
+            ];
+
+            echo json_encode($json);
+        } else {
+            exit('Maaf tidak bisa dipanggil');
+        }
+    }
+
+    function detailCariBarang()
+    {
+        if ($this->request->isAJAX()) {
+            $cari = $this->request->getPost('cari');
+
+            $modalBarang = new Modelbarang();
+
+            $data = $modalBarang->tampildata_cari($cari)->get();
+
+            if($data != null){
+                $json = [
+                    'data' => view('barangmasuk/detaildatabarang', [
+                        'tampildata' => $data
+                    ])
+                ];
+
+                echo json_encode($json);
+            }
+        } else {
+            exit('Maaf tidak bisa dipanggil');
+        }
+    }
+
+    function selesaiTransaksi(){
+        if ($this->request->isAJAX()) {
+            $faktur = $this->request->getPost('faktur');
+            $tglfaktur = $this->request->getPost('tglfaktur');
+
+            $modelTemp = new Modeltempbarangmasuk();
+            $dataTemp = $modelTemp->getWhere(['detfaktur' => $faktur]);
+
+            if($dataTemp->getNumRows() == 0){
+                $json = [
+                    'error' => 'Maaf, data item untuk faktur ini belum ada'
+                ];
+            }else{
+                //Simpan ke tabel barang masuk
+                $modalBarangMasuk = new Modelbarangmasuk();
+                $totalSubTotal = 0;
+                foreach($dataTemp->getResultArray() as $total):
+                    $totalSubTotal += intval($total['detsubtotal']);
+            endforeach;
+            
+            $modalBarangMasuk->insert([
+                'faktur' => $faktur,
+                'tglfaktur' => $tglfaktur,
+                'totalharga' => $totalSubTotal
+            ]);
+            //Simpan ke Tabel detail barang masuk
+            $modelDetailBarangMasuk = new Modeldetailbarangmasuk();
+            foreach($dataTemp->getResultArray() as $row):
+               $modelDetailBarangMasuk->insert([
+                'detfaktur' => $row['detfaktur'],
+                'detbrgkode' => $row['detbrgkode'],
+                'dethargamasuk' => $row['dethargamasuk'],
+                'detjml' => $row['detjml'],
+                'detsubtotal' => $row['detsubtotal'],
+               ]);
+        endforeach;
+
+        //Hapus data yang ada ditabel temp 
+        $modelTemp->emptyTable();
+
+            $json = [
+                'sukses' => 'Transaksi Berhasil disimpan'
+            ];
+        }
+
+            echo json_encode($json);
+        } else {
+            exit('Maaf tidak bisa dipanggil');
+        }
+    }
+
+    public function data(){
+        $tombolcari = $this->request->getPost('tombolcari');
+
+        if(isset($tombolcari)){
+            $cari = $this->request->getPost('cari');
+            session()->set('cari_faktur', $cari);
+            redirect()->to('/barangmasuk/data');
+        }else{
+            $cari = session()->get('cari_faktur');
+        }
+
+        $modelBarangMasuk = new Modelbarangmasuk();
+
+        $totaldata = $cari ? $modelBarangMasuk->tampildata_cari($cari)->countAllResults() : $modelBarangMasuk->countAllResults();
+        
+        $dataBarangmasuk = $cari ? $modelBarangMasuk->tampildata_cari($cari)->paginate(10, 'barangmasuk') : $modelBarangMasuk->paginate(10, 'barangmasuk');
+
+        $nohalaman = $this->request->getVar('page_barangmasuk') ? $this->request->getVar('page_barangmasuk') : 1;
+        $data = [
+            'tampildata' => $dataBarangmasuk,
+            'pager' => $modelBarangMasuk->pager,
+            'nohalaman' => $nohalaman,
+            'totaldata' => $totaldata,
+            'cari' => $cari,
+        ];
+
+        return view('barangmasuk/viewdata', $data);
+    }
+    function detailItem(){
+        if($this->request->isAJAX()){
+            $faktur = $this->request->getPost('faktur');
+            $modelDetail = new Modeldetailbarangmasuk();
+            
+            $data = [
+                'tampildatadetail' => $modelDetail->dataDetail($faktur)
+
+            ];
+
+            $json = [
+                'data' => view('barangmasuk/modaldetailitem' ,$data)
             ];
             echo json_encode($json);
-        }else{
-
-            exit('Maaf tidak bisa dipanggil');
         }
     }
 }
