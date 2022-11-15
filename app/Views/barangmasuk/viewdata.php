@@ -44,7 +44,17 @@ Data Transaksi Barang Masuk
                 <td><?= $nomor; ?></td>
                 <td><?= $row['faktur']; ?></td>
                 <td><?= date('d-m-Y', strtotime($row['tglfaktur'])); ?></td>
+
+                <td align="center">
+                    <?php
+                        $db = \Config\Database::connect();
+                        $jumlahItem = $db->table('detail_barangmasuk')->where('detfaktur',$row['faktur'])->countAllResults();
+                    ?>
+                    <span style="cursor:pointer; font-weight: bold; color: blue;" 
+                        onclick="detailItem('<?= $row['faktur'] ?>')"><?= $jumlahItem; ?></span>
+
                 <td>
+
 
                 </td>
                 <td>
@@ -57,7 +67,36 @@ Data Transaksi Barang Masuk
         <?php endforeach; ?>
     </tbody>
 </table>
+
+<div class="viewmodal" style="display: none;"></div>
 <div class="float-left mt-4">
     <?= $pager->links('barangmasuk', 'paging') ?>
 </div>
+<script>
+    function detailItem(faktur){
+        alert(faktur);
+        $.ajax({
+            type: "post",
+            url: "/barangmasuk/detailItem",
+            data:{
+                faktur : faktur
+            },
+            dataType: "json",
+            success: function(response){
+                if(response.data){
+                    $('.viewmodal').html(response.data).show();
+                    $('#modalitem').modal('show');
+                }
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert(xhr.status + '\n' + thrownError);
+            }            
+        });
+    }
+</script>
+
+<div class="float-left mt-4">
+    <?= $pager->links('barangmasuk', 'paging') ?>
+</div>
+
 <?= $this->endSection('isi') ?>

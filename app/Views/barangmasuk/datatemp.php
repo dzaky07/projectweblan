@@ -13,8 +13,7 @@
     </thead>
     <tbody>
         <?php
-        $nomor = 1;
-        foreach ($datatemp->getResultArray() as $row) :
+
         $nomor = 1;
         foreach ($datatemp->getResultArray() as $row) :
         ?>
@@ -22,16 +21,16 @@
                 <td><?= $nomor++; ?></td>
                 <td><?= $row['brgkode']; ?></td>
                 <td><?= $row['brgnama']; ?></td>
-                <td style="text-align: right;">
+                <td >
                     <?= number_format($row['dethargajual'], 0, ",", ".") ?>
                 </td>
-                <td style="text-align: right;">
+                <td >
                     <?= number_format($row['dethargamasuk'], 0, ",", ".") ?>
                 </td>
-                <td style="text-align: right;">
+                <td style="text-align: center;"> 
                     <?= number_format($row['detjml'], 0, ",", ".") ?>
                 </td>
-                <td style="text-align: right;">
+                <td >
                     <?= number_format($row['detsubtotal'], 0, ",", ".") ?>
                 </td>
                 <td>
@@ -80,6 +79,7 @@
             }
         })
     }
+
 </script>
             $nomor = 1;
             foreach($datatemp->getResultArray() as $row):
@@ -149,4 +149,5 @@
 </script>
 </script>
 </script>
+
 </script>

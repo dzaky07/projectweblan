@@ -8,14 +8,10 @@ use App\Models\Modelbarang;
 
 
 use App\Models\Modeltempbarangmasuk;
-use CodeIgniter\HTTP\Request;
-
-
-use App\Models\Modelbarang;
-use App\Models\Modeltempbarangmasuk;
 use App\Models\Modelbarangmasuk;
 use App\Models\Modeldetailbarangmasuk;
 use CodeIgniter\HTTP\Request;
+
 
 class Barangmasuk extends BaseController
 {
@@ -36,7 +32,6 @@ class Barangmasuk extends BaseController
     function dataTemp()
     {
         if ($this->request->isAJAX()) {
-
             $faktur = $this->request->getPost('faktur');
 
             $modelTemp = new Modeltempbarangmasuk();
@@ -134,6 +129,10 @@ class Barangmasuk extends BaseController
         if ($this->request->isAJAX()) {
             $json = [
                 'data' => view('barangmasuk/modalcaribarang')
+
+            ];
+
+
                 'data'=> view('barangmasuk/datatemp', $data)
             ];
 
@@ -168,12 +167,12 @@ class Barangmasuk extends BaseController
                 'data' => view('barangmasuk/modalcaribarang')
             ];
 
+
             echo json_encode($json);
         } else {
             exit('Maaf tidak bisa dipanggil');
         }
     }
-
 
     function detailCariBarang()
     {
@@ -181,9 +180,15 @@ class Barangmasuk extends BaseController
             $cari = $this->request->getPost('cari');
 
             $modalBarang = new Modelbarang();
+
+
+            $data = $modalBarang->tampildata_cari($cari)->get();
+
+
             $data = $modalBarang->tampildata_cari($cari)->get();
             $data = $modalBarang->tampildata_cari($cari)->get();
             $data = $modalBarang->tampildata_cari($cari);
+
             if($data != null){
                 $json = [
                     'data' => view('barangmasuk/detaildatabarang', [
@@ -194,6 +199,57 @@ class Barangmasuk extends BaseController
                 echo json_encode($json);
             }
         } else {
+
+            exit('Maaf tidak bisa dipanggil');
+        }
+    }
+
+    function selesaiTransaksi(){
+        if ($this->request->isAJAX()) {
+            $faktur = $this->request->getPost('faktur');
+            $tglfaktur = $this->request->getPost('tglfaktur');
+
+            $modelTemp = new Modeltempbarangmasuk();
+            $dataTemp = $modelTemp->getWhere(['detfaktur' => $faktur]);
+
+            if($dataTemp->getNumRows() == 0){
+                $json = [
+                    'error' => 'Maaf, data item untuk faktur ini belum ada'
+                ];
+            }else{
+                //Simpan ke tabel barang masuk
+                $modalBarangMasuk = new Modelbarangmasuk();
+                $totalSubTotal = 0;
+                foreach($dataTemp->getResultArray() as $total):
+                    $totalSubTotal += intval($total['detsubtotal']);
+            endforeach;
+            
+            $modalBarangMasuk->insert([
+                'faktur' => $faktur,
+                'tglfaktur' => $tglfaktur,
+                'totalharga' => $totalSubTotal
+            ]);
+            //Simpan ke Tabel detail barang masuk
+            $modelDetailBarangMasuk = new Modeldetailbarangmasuk();
+            foreach($dataTemp->getResultArray() as $row):
+               $modelDetailBarangMasuk->insert([
+                'detfaktur' => $row['detfaktur'],
+                'detbrgkode' => $row['detbrgkode'],
+                'dethargamasuk' => $row['dethargamasuk'],
+                'detjml' => $row['detjml'],
+                'detsubtotal' => $row['detsubtotal'],
+               ]);
+        endforeach;
+
+        //Hapus data yang ada ditabel temp 
+        $modelTemp->emptyTable();
+
+            $json = [
+                'sukses' => 'Transaksi Berhasil disimpan'
+            ];
+        }
+
+
         }else{
             exit('Maaf tidak bisa dipanggil');
         }
@@ -244,6 +300,7 @@ class Barangmasuk extends BaseController
             ];
         }
 
+
             echo json_encode($json);
         } else {
             exit('Maaf tidak bisa dipanggil');
@@ -278,4 +335,22 @@ class Barangmasuk extends BaseController
 
         return view('barangmasuk/viewdata', $data);
     }
+
+    function detailItem(){
+        if($this->request->isAJAX()){
+            $faktur = $this->request->getPost('faktur');
+            $modelDetail = new Modeldetailbarangmasuk();
+            
+            $data = [
+                'tampildatadetail' => $modelDetail->dataDetail($faktur)
+
+            ];
+
+            $json = [
+                'data' => view('barangmasuk/modaldetailitem' ,$data)
+            ];
+            echo json_encode($json);
+        }
+    }
+
 }

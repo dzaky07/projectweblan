@@ -14,10 +14,16 @@
     <link rel="stylesheet" href="<?= base_url() ?>/dist/css/adminlte.min.css">
     <!-- jQuery -->
     <script src="<?= base_url() ?>/plugins/jquery/jquery.min.js"></script>
+
+    
+    <link rel="stylesheet" href="<?= base_url() ?>/plugins/sweetalert2/sweetalert2.min.css">
+    <script src="<?= base_url() ?>/plugins/sweetalert2/sweetalert2.all.min.js"></script>
+
     <link rel="stylesheet" href="<?= base_url() ?>/plugins/sweetalert2/sweetalert2.min.css">
     <script src="<?= base_url() ?>/plugins/sweetalert2/sweetalert2.all.min.js"></script>
     <link rel="stylesheet" href="<?= base_url() ?>/plugins/sweetalert2/sweetalert2.min.css">
     <script src="<?= base_url() ?>/plugins/sweetalert2/sweetalert2.all.min.js"></script>
+
 </head>
 
 <body class="hold-transition sidebar-mini">
