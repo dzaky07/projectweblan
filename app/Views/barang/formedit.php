@@ -22,11 +22,7 @@ Form Edit Barang
 <?= form_open_multipart('barang/updatedata') ?>
 
 <?= form_open_multipart('barang/updatedata') ?>
-
 <?= form_open_multipart('barang/simpandata') ?>
-
-
-
 <?= session()->getFlashdata('error'); ?>
 <?= session()->getFlashdata('sukses'); ?>
 <div class="form-group row">
@@ -34,11 +30,8 @@ Form Edit Barang
   <div class="col-sm-8">
 
     <input type="Text" class="form-control" id="kodebarang" name="kodebarang" readonly value="<?= $kodebarang; ?>">
-
     <input type="Text" class="form-control" id="kodebarang" name="kodebarang" readonly value="<?= $kodebarang; ?>">
-
     <input type="Text" class="form-control" id="kodebarang" name="kodebarang" autofocus>
-
   </div>
 </div>
 
@@ -50,7 +43,6 @@ Form Edit Barang
 
     <input type="Text" class="form-control" id="namabarang" name="namabarang" value="<?= $namabarang; ?>">
     <input type="Text" class="form-control" id="namabarang" name="namabarang">
-
   </div>
 </div>
 
@@ -81,7 +73,6 @@ Form Edit Barang
       <?php foreach ($datakategori as $kat) : ?>
         <option value="<?= $kat['katid'] ?>"><?= $kat['katnama'] ?></option>
       <?php endforeach; ?>
-
     </select>
   </div>
 </div>
@@ -92,9 +83,7 @@ Form Edit Barang
 
     <input type="number" class="form-control" id="harga" name="harga" value="<?= $harga; ?>">
     <input type="number" class="form-control" id="harga" name="harga" value="<?= $harga; ?>">
-
     <input type="number" class="form-control" id="harga" name="harga">
-
   </div>
 </div>
 
@@ -110,7 +99,6 @@ Form Edit Barang
   <div class="col-sm-4">
     <img src="<?= base_url().'/'.$gambar ?>" class="img-thumbnail" style="width: 50%;" alt="Gambar Barang">
     <input type="number" class="form-control" id="stok" name="stok">
-
   </div>
 </div>
 
@@ -120,7 +108,6 @@ Form Edit Barang
 
   <label for="" class="col-sm-4 col-form-label">Upload Gambar (<i>Jika diganti..</i>)</label>
   <label for="" class="col-sm-4 col-form-label">Upload Gambar (<i>Optional</i>)</label>
-
   <div class="col-sm-4">
     <input type="file" id="gambar" name="gambar">
   </div>

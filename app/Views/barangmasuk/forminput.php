@@ -6,7 +6,7 @@ Input Barang Masuk
 
 <?= $this->section('subjudul') ?>
 
-<button type="button" class="btn btn-sm btn-warning" onclick="location.href=('/barangmasuk/index')">
+<button type="button" class="btn btn-sm btn-warning" onclick="location.href=('/barangmasuk/data')">
   <i class="fa fa-backward"></i> Kembali
 </button>
 
@@ -36,7 +36,6 @@ Input Barang Masuk
     <input type="date" class="form-control" name="tglfaktur" id="tglfaktur" value="<?= date('Y-m-d') ?>">
   </div>
 </div>
-
 <div class="card">
   <div class="card-header bg-primary">
     Input Barang
@@ -84,6 +83,11 @@ Input Barang Masuk
       </div>
     </div>
     <div class="row" id="tampilDataTemp"></div>
+    <div class="row justify-content-end">
+      <button type="button" class="btn btn-lg btn-success" id="tombolSelesaiTransaksi">
+        <i class="fa fa-save"></i> Selesai Transaksi
+      </button>
+    </div>
   </div>
 </div>
 <div class="modalcaribarang" style="display: none;"></div>
@@ -189,7 +193,6 @@ Input Barang Masuk
       },
       error: function(xhr, ajaxOptions, thrownError) {
         faktur : faktur
-
       },
       dataType: "json",
       success: function(response) {
@@ -209,7 +212,6 @@ Input Barang Masuk
     $('#hargajual').val('');
     $('#hargabeli').val('');
     $('#jumlah').val('');
-
     $('#kdbarang').focus();
   }
 
@@ -248,40 +250,43 @@ $.ajax({
     $('#jumlah').val();
     $('#kdbarang').focus();
   }
+
+  function ambilDataBarang() {
+    let kodebarang = $('#kdbarang').val();
+
+    $.ajax({
+      type: "post",
+      url: "/barangmasuk/ambilDataBarang",
+      data: {
+        kodebarang: kodebarang
+      },
+      dataType: "json",
+      success: function(response) {
+        if (response.sukses) {
+          let data = response.sukses;
+          $('#namabarang').val(data.namabarang);
+          $('#hargajual').val(data.hargajual);
+
+          $('#hargabeli').focus();
+        }
+
+        if (response.error) {
+          alert(response.error);
+          kosong();
+        }
+      },
+      error: function(xhr, ajaxOptions, thrownError) {
+        alert(xhr.status + '\n' + thrownError);
+      }
+    });
+  }
   $(document).ready(function() {
     dataTemp();
 
     $('#kdbarang').keydown(function(e) {
       if (e.keyCode == 13) {
         e.preventDefault();
-        let kodebarang = $('#kdbarang').val();
-
-        $.ajax({
-          type: "post",
-          url: "/barangmasuk/ambilDataBarang",
-          data: {
-            kodebarang: kodebarang
-          },
-          dataType: "json",
-          success: function(response) {
-            if (response.sukses) {
-              let data = response.sukses;
-              $('#namabarang').val(data.namabarang);
-              $('#hargajual').val(data.hargajual);
-
-              $('#hargabeli').focus();
-            }
-
-            if (response.error) {
-              alert(response.error);
-              kosong();
-            }
-          },
-          error: function(xhr, ajaxOptions, thrownError) {
-            alert(xhr.status + '\n' + thrownError);
-          }
-        });
-
+        ambilDataBarang();
       }
     });
 
@@ -292,6 +297,7 @@ $.ajax({
       let hargabeli = $('#hargabeli').val();
       let jumlah = $('#jumlah').val();
       let hargajual = $('#hargajual').val();
+      console.log(hargabeli);
 
       if (faktur.length == 0) {
         Swal.fire({
@@ -299,34 +305,6 @@ $.ajax({
           title: 'Error',
           text: 'Maaf, Faktur tidak boleh kosong',
         })
-        Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: 'Maaf, Faktur tidak boleh kosong',
-          })
-      } else if (kodebarang.length == 0) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: 'Maaf, kode barang tidak boleh kosong',
-          })
-        //alert('Maaf, kode barang tidak boleh kosong');
-      } else if (hargabeli.length == 0) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: 'Maaf, Harga Beli tidak boleh kosong',
-          })
-        //alert('Maaf, Harga Beli tidak boleh kosong');
-      } else if (jumlah.length == 0) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: 'Maaf, Jumlah tidak boleh kosong',
-          })
-        //alert('Maaf, Jumlah tidak boleh kosong');
-
-        alert('Maaf, faktur wajib diisi');
       } else if (kodebarang.length == 0) {
         Swal.fire({
           icon: 'error',
@@ -340,6 +318,13 @@ $.ajax({
           title: 'Error',
           text: 'Maaf, Harga Beli tidak boleh kosong',
         })
+      }
+        else if (hargabeli >= hargajual) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Maaf, Harga Beli tidak boleh lebih besar dari harga jual',
+        })
         //alert('Maaf, Harga Beli tidak boleh kosong');
       } else if (jumlah.length == 0) {
         Swal.fire({
@@ -348,7 +333,6 @@ $.ajax({
           text: 'Maaf, Jumlah tidak boleh kosong',
         })
         //alert('Maaf, Jumlah tidak boleh kosong');
-        alert('Maaf, Jumlah tidak boleh kosong');
       } else {
         $.ajax({
           type: "post",
@@ -374,13 +358,6 @@ $.ajax({
         });
       }
     });
-    $('#tombolReload').click(function (e) {
-      e.preventDefault();
-      dataTemp();
-    });
-  });
-</script>
-
   });
 </script>
 $(document).ready(function () {
@@ -487,21 +464,79 @@ $(document).ready(function () {
       dataTemp();
     });
 
-    $('#tombolCariBarang').click(function (e){
+    $('#tombolCariBarang').click(function(e) {
       e.preventDefault();
       $.ajax({
         url: "/barangmasuk/cariDataBarang",
         dataType: "json",
-        success: function (response){
-          if(response.data){
+        success: function(response) {
+          if (response.data) {
             $('.modalcaribarang').html(response.data).show();
             $('#modalcaribarang').modal('show');
           }
         },
         error: function(xhr, ajaxOptions, thrownError) {
-            alert(xhr.status + '\n' + thrownError);
-          }
+          alert(xhr.status + '\n' + thrownError);
+        }
       });
+    });
+    $('#tombolSelesaiTransaksi').click(function(e) {
+      e.preventDefault();
+      let faktur = $('#faktur').val();
+
+      if (faktur.length == 0) {
+        Swal.fire({
+          title: 'Pesan',
+          icon: 'warning',
+          text: 'Maaf, faktur tidak boleh kosong'
+        });
+      } else {
+        Swal.fire({
+          title: 'Selesai Transaksi',
+          text: "Yakin transaksi ini disimpan?",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Ya, Simpan'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            $.ajax({
+              type: "post",
+              url: "/barangmasuk/selesaiTransaksi",
+              data: {
+                faktur: faktur,
+                tglfaktur: $('#tglfaktur').val()
+              },
+              dataType: "json",
+              success: function(response) {
+                if (response.error) {
+                  Swal.fire({
+                    title: 'Error',
+                    icon: 'error',
+                    text: response.error
+                  });
+                }
+
+                if(response.sukses){
+                  Swal.fire({
+                    title: 'Berhasil',
+                    icon: 'success',
+                    text: response.sukses
+                  }).then((result) =>{
+                    if(result.isConfirmed){
+                      window.location.reload();
+                    }
+                  })
+                }
+              },
+              error: function(xhr, ajaxOptions, thrownError) {
+                alert(xhr.status + '\n' + thrownError);
+              }
+            });
+          }
+        })
+      }
     });
   });
 </script>
