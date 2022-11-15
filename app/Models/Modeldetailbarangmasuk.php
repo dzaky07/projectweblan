@@ -17,6 +17,7 @@ class Modeldetailbarangmasuk extends Model
         ();
     }
 
+
     public function ambilTotalHarga($faktur){
         $query =$this->table('detail_barangmasuk')->getWhere([
             'detfaktur' =>$faktur
@@ -31,4 +32,5 @@ class Modeldetailbarangmasuk extends Model
         return $totalHarga;
     }
     
+
 }
