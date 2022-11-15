@@ -3,6 +3,14 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+
+use App\Models\Modelbarang;
+
+
+use App\Models\Modeltempbarangmasuk;
+use CodeIgniter\HTTP\Request;
+
+
 use App\Models\Modelbarang;
 use App\Models\Modeltempbarangmasuk;
 use App\Models\Modelbarangmasuk;
@@ -16,9 +24,19 @@ class Barangmasuk extends BaseController
         return view('barangmasuk/forminput');
     }
 
+
     function dataTemp()
     {
         if ($this->request->isAJAX()) {
+
+
+    function dataTemp(){
+        if($this->request->isAJAX()){
+
+    function dataTemp()
+    {
+        if ($this->request->isAJAX()) {
+
             $faktur = $this->request->getPost('faktur');
 
             $modelTemp = new Modeltempbarangmasuk();
@@ -86,12 +104,45 @@ class Barangmasuk extends BaseController
 
             $json = [
                 'sukses' => 'Item berhasil ditambahkan'
+
             ];
             echo json_encode($json);
         } else {
             exit('Maaf tidak bisa dipanggil');
         }
     }
+
+    function hapus()
+    {
+        if ($this->request->isAJAX()) {
+            $id = $this->request->getPost('id');
+
+            $modelTempBarang = new Modeltempbarangmasuk();
+            $modelTempBarang->delete($id);
+
+            $json = [
+                'sukses' => 'Item berhasil dihapus'
+            ];
+            echo json_encode($json);
+        } else {
+            exit('Maaf tidak bisa dipanggil');
+        }
+    }
+
+    function cariDataBarang()
+    {
+        if ($this->request->isAJAX()) {
+            $json = [
+                'data' => view('barangmasuk/modalcaribarang')
+                'data'=> view('barangmasuk/datatemp', $data)
+            ];
+
+            echo json_encode($json);
+        } else {
+            exit('Maaf tidak bisa dipanggil');
+        }
+    }
+
 
     function hapus()
     {
@@ -123,15 +174,16 @@ class Barangmasuk extends BaseController
         }
     }
 
+
     function detailCariBarang()
     {
         if ($this->request->isAJAX()) {
             $cari = $this->request->getPost('cari');
 
             $modalBarang = new Modelbarang();
-
             $data = $modalBarang->tampildata_cari($cari)->get();
-
+            $data = $modalBarang->tampildata_cari($cari)->get();
+            $data = $modalBarang->tampildata_cari($cari);
             if($data != null){
                 $json = [
                     'data' => view('barangmasuk/detaildatabarang', [
@@ -142,6 +194,7 @@ class Barangmasuk extends BaseController
                 echo json_encode($json);
             }
         } else {
+        }else{
             exit('Maaf tidak bisa dipanggil');
         }
     }
