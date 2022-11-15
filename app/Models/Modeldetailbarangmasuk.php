@@ -16,4 +16,21 @@ class Modeldetailbarangmasuk extends Model
         return $this->table('detail_barangmasuk')->join('barang', 'brgkode=detbrgkode')->where('detfaktur', $faktur)->get
         ();
     }
+
+
+    public function ambilTotalHarga($faktur){
+        $query =$this->table('detail_barangmasuk')->getWhere([
+            'detfaktur' =>$faktur
+        ]);
+
+        $totalHarga =0;
+        foreach($query->getResultArray() as $r){
+            $totalHarga += $r['detsubtotal'];
+
+        }
+
+        return $totalHarga;
+    }
+    
+
 }
