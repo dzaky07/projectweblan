@@ -31,6 +31,13 @@ class Modeldetailbarangmasuk extends Model
 
         return $totalHarga;
     }
+
+
+    public function ambilDetailBerdasarkanID($iddetail){
+        return $this->table('detail_barangmasuk')->join('barang', 'brgkode=detbrgkode')->where('iddetail', $iddetail)->get
+        ();
+    }
+
     
 
 }

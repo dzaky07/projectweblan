@@ -20,6 +20,7 @@ Input Barang Masuk
   </div>
   <div class="form-group col-md-6">
 
+
     <label for="">Tanggal Faktur</label>
     <input type="date" class="form-control" name="tglfaktur" id="tglfaktur" value="<?= date('Y-m-d') ?>">
   </div>
@@ -32,6 +33,7 @@ Input Barang Masuk
       <input type="text" class="form-control" placeholder="No.Faktur" name="faktur" id="faktur">
     </div>
     <div class="form-group col-md-6">
+
 
 
     <label for="">Tanggal Faktur</label>
@@ -89,6 +91,9 @@ Input Barang Masuk
       <button type="button" class="btn btn-lg btn-success" id="tombolSelesaiTransaksi">
         <i class="fa fa-save"></i> Selesai Transaksi
       </button>
+
+    </div>
+
 
     </div>
 
@@ -180,6 +185,7 @@ Input Barang Masuk
 
 
 
+
   </div>
 </div>
 <div class="modalcaribarang" style="display: none;"></div>
@@ -193,6 +199,7 @@ Input Barang Masuk
       data: {
         faktur: faktur
 
+
       },
       dataType: "json",
       success: function(response) {
@@ -203,6 +210,7 @@ Input Barang Masuk
       error: function(xhr, ajaxOptions, thrownError) {
 
         faktur : faktur
+
 
       },
       dataType: "json",
@@ -243,6 +251,12 @@ Input Barang Masuk
           let data = response.sukses;
           $('#namabarang').val(data.namabarang);
           $('#hargajual').val(data.hargajual);
+
+
+          $('#hargabeli').focus();
+        }
+
+
 
 
           $('#hargabeli').focus();
@@ -311,6 +325,7 @@ Input Barang Masuk
         }
 
 
+
         if (response.error) {
           alert(response.error);
           kosong();
@@ -360,6 +375,10 @@ Input Barang Masuk
           title: 'Error',
           text: 'Maaf, Harga Beli tidak boleh kosong',
         })
+
+      }
+        else if (hargabeli >= hargajual) {
+
 
       }
         else if (hargabeli >= hargajual) {
@@ -439,10 +458,12 @@ $(document).ready(function () {
         })
       } else if (kodebarang.length == 0) {
 
+
         Swal.fire({
           icon: 'error',
           title: 'Error',
           text: 'Maaf, Harga Beli tidak boleh lebih besar dari harga jual',
+
         })
 
       }
@@ -451,6 +472,7 @@ $(document).ready(function () {
           icon: 'error',
           title: 'Error',
           text: 'Maaf, Harga Beli tidak boleh lebih besar dari harga jual',
+
         })
 
         //alert('Maaf, Harga Beli tidak boleh kosong');
@@ -494,6 +516,15 @@ $(document).ready(function () {
 
 
     $('#tombolCariBarang').click(function(e) {
+      e.preventDefault();
+      $.ajax({
+        url: "/barangmasuk/cariDataBarang",
+        dataType: "json",
+        success: function(response) {
+          if (response.data) {
+
+
+    $('#tombolCariBarang').click(function(e) {
 
 
     $('#tombolCariBarang').click(function(e) {
@@ -515,14 +546,17 @@ $(document).ready(function () {
           if(response.data){
 
 
+
             $('.modalcaribarang').html(response.data).show();
             $('#modalcaribarang').modal('show');
           }
         },
         error: function(xhr, ajaxOptions, thrownError) {
 
+
           alert(xhr.status + '\n' + thrownError);
         }
+
 
 
           alert(xhr.status + '\n' + thrownError);
@@ -532,6 +566,7 @@ $(document).ready(function () {
     $('#tombolSelesaiTransaksi').click(function(e) {
       e.preventDefault();
       let faktur = $('#faktur').val();
+
 
       if (faktur.length == 0) {
         Swal.fire({
@@ -653,7 +688,7 @@ $(document).ready(function () {
           }
         })
       }
-=======
+
     $('#tombolCariBarang').click(function(e) {
       e.preventDefault();
       $.ajax({
@@ -674,6 +709,7 @@ $(document).ready(function () {
     $('#tombolSelesaiTransaksi').click(function(e) {
       e.preventDefault();
       let faktur = $('#faktur').val();
+
 
       if (faktur.length == 0) {
         Swal.fire({

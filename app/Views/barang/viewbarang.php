@@ -15,6 +15,7 @@ Ini Adalah Judul Barang
 <?= $this->section('isi') ?>
 
 
+
 <?= session()->getFlashdata('error'); ?>
 <?= session()->getFlashdata('sukses'); ?>
 
@@ -35,11 +36,14 @@ Ini Adalah Judul Barang
     <input type="text" class="form-control" placeholder="Cari data berdasarkan Kode, Nama Barang & Kategori" name="cari" autofocus value="<?= $cari?>">
 
 
+
 <?= session()->getFlashdata('error'); ?>
 <?= session()->getFlashdata('sukses'); ?>
 <?= form_open('barang/index') ?>
 <div class="input-group mb-3">
     <input type="text" class="form-control" placeholder="Cari data berdasarkan Kode, Nama Barang & Kategori" name="cari" autofocus value="<?= $cari?>">
+
+
 
     <div class="input-group-append">
         <button class="btn btn-outline-success" type="submit" name="tombolcari">
@@ -55,10 +59,12 @@ Ini Adalah Judul Barang
 </span>
 <br>
 
+
 <?= session()->getFlashdata('error'); ?>
 <?= session()->getFlashdata('sukses'); ?>
 <?= session()->getFlashdata('error'); ?>
 <?= session()->getFlashdata('sukses'); ?>
+
 
 
 <table class="table table-striped table-bordered" style="width:100%;">
@@ -100,6 +106,7 @@ Ini Adalah Judul Barang
                         </button>
                     </form>
 
+
                 <td><?= number_format($row['brgharga'],0); ?></td>
 
 
@@ -121,12 +128,24 @@ Ini Adalah Judul Barang
                     </form>
 
 
+
                 </td>
             </tr>
 
         <?php endforeach; ?>
     </tbody>
 </table>
+<div class="float-left mt-4">
+    <?= $pager->links('barang','paging') ?>
+</div>
+
+
+
+
+<div class="float-left mt-4">
+    <?= $pager->links('barang','paging') ?>
+</div>
+
 
 <div class="float-left mt-4">
     <?= $pager->links('barang','paging') ?>
@@ -139,22 +158,12 @@ Ini Adalah Judul Barang
 </div>
 
 
-<div class="float-left mt-4">
-    <?= $pager->links('barang','paging') ?>
-</div>
-
 
 
 <div class="float-left mt-4">
     <?= $pager->links('barang','paging') ?>
 </div>
 
-
-
-
-<div class="float-left mt-4">
-    <?= $pager->links('barang','paging') ?>
-</div>
 
 <script>
     function edit(kode) {
@@ -172,7 +181,11 @@ Ini Adalah Judul Barang
 </script>
 
 <?= $this->endSection('isi') ?>
-=======
+
 
 <?= $this->endSection('isi') ?>
+
+
+<?= $this->endSection('isi') ?>
+
 
