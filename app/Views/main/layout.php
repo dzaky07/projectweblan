@@ -14,8 +14,7 @@
     <link rel="stylesheet" href="<?= base_url() ?>/dist/css/adminlte.min.css">
     <!-- jQuery -->
     <script src="<?= base_url() ?>/plugins/jquery/jquery.min.js"></script>
-    <link rel="stylesheet" href="<?= base_url() ?>/plugins/sweetalert2/sweetalert2.min.css">
-    <script src="<?= base_url() ?>/plugins/sweetalert2/sweetalert2.all.min.js"></script>
+    
     <link rel="stylesheet" href="<?= base_url() ?>/plugins/sweetalert2/sweetalert2.min.css">
     <script src="<?= base_url() ?>/plugins/sweetalert2/sweetalert2.all.min.js"></script>
 </head>
@@ -97,6 +96,12 @@
                             <a href="<?= site_url('barangmasuk/data'); ?>" class="nav-link">
                                 <i class="nav-icon fa fa-arrow-circle-down text-primary"></i>
                                 <p class="text">Barang Masuk</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= site_url('barangkeluar/data'); ?>" class="nav-link">
+                                <i class="nav-icon fa fa-arrow-circle-up text-warning"></i>
+                                <p class="text">Barang Keluar</p>
                             </a>
                         </li>
                     </ul>
