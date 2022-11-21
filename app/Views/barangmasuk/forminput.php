@@ -19,15 +19,12 @@ Input Barang Masuk
     <input type="text" class="form-control" placeholder="No.Faktur" name="faktur" id="faktur">
   </div>
   <div class="form-group col-md-6">
-
-
     <label for="">Tanggal Faktur</label>
     <input type="date" class="form-control" name="tglfaktur" id="tglfaktur" value="<?= date('Y-m-d') ?>">
   </div>
 </div>
 
 <div class="card">
-
     <div class="form-group col-md-6">
         <label for="">Input Faktur Barang Masuk</label>
       <input type="text" class="form-control" placeholder="No.Faktur" name="faktur" id="faktur">
@@ -41,7 +38,6 @@ Input Barang Masuk
   </div>
 </div>
 <div class="card">
-
   <div class="card-header bg-primary">
     Input Barang
   </div>
@@ -198,8 +194,6 @@ Input Barang Masuk
       url: "/barangmasuk/dataTemp",
       data: {
         faktur: faktur
-
-
       },
       dataType: "json",
       success: function(response) {
@@ -210,8 +204,6 @@ Input Barang Masuk
       error: function(xhr, ajaxOptions, thrownError) {
 
         faktur : faktur
-
-
       },
       dataType: "json",
       success: function(response) {
@@ -235,7 +227,6 @@ Input Barang Masuk
     $('#jumlah').val('');
     $('#kdbarang').focus();
   }
-
   function ambilDataBarang() {
     let kodebarang = $('#kdbarang').val();
 
@@ -304,7 +295,6 @@ Input Barang Masuk
     $('#kdbarang').focus();
 
   }
-
   function ambilDataBarang() {
     let kodebarang = $('#kdbarang').val();
 
@@ -323,9 +313,6 @@ Input Barang Masuk
 
           $('#hargabeli').focus();
         }
-
-
-
         if (response.error) {
           alert(response.error);
           kosong();
@@ -508,13 +495,10 @@ $(document).ready(function () {
         });
       }
     });
-
     $('#tombolReload').click(function(e) {
       e.preventDefault();
       dataTemp();
     });
-
-
     $('#tombolCariBarang').click(function(e) {
       e.preventDefault();
       $.ajax({
@@ -525,10 +509,7 @@ $(document).ready(function () {
 
 
     $('#tombolCariBarang').click(function(e) {
-
-
     $('#tombolCariBarang').click(function(e) {
-
     $('#tombolCariBarang').click(function (e){
 
       e.preventDefault();
@@ -566,8 +547,6 @@ $(document).ready(function () {
     $('#tombolSelesaiTransaksi').click(function(e) {
       e.preventDefault();
       let faktur = $('#faktur').val();
-
-
       if (faktur.length == 0) {
         Swal.fire({
           title: 'Pesan',
@@ -688,7 +667,6 @@ $(document).ready(function () {
           }
         })
       }
-
     $('#tombolCariBarang').click(function(e) {
       e.preventDefault();
       $.ajax({

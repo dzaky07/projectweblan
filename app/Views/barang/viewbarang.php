@@ -13,9 +13,8 @@ Ini Adalah Judul Barang
 <?= $this->endSection('subjudul') ?>
 
 <?= $this->section('isi') ?>
-
-
-
+<?= session()->getFlashdata('error'); ?>
+<?= session()->getFlashdata('sukses'); ?>
 <?= session()->getFlashdata('error'); ?>
 <?= session()->getFlashdata('sukses'); ?>
 
@@ -58,15 +57,10 @@ Ini Adalah Judul Barang
     </h5>
 </span>
 <br>
-
-
 <?= session()->getFlashdata('error'); ?>
 <?= session()->getFlashdata('sukses'); ?>
 <?= session()->getFlashdata('error'); ?>
 <?= session()->getFlashdata('sukses'); ?>
-
-
-
 <table class="table table-striped table-bordered" style="width:100%;">
     <thead>
         <tr>
@@ -79,7 +73,6 @@ Ini Adalah Judul Barang
             <th style="width: 15%;">Aksi</th>
         </tr>
     </thead>
-
     <tbody>
         <?php
         $nomor = 1 + (($nohalaman - 1) * 10);
@@ -105,13 +98,8 @@ Ini Adalah Judul Barang
                             <i class="fa fa-trash-alt"></i>
                         </button>
                     </form>
-
-
                 <td><?= number_format($row['brgharga'],0); ?></td>
-
-
               <td><?= number_format($row['brgharga'],0); ?></td>
-
                 <td><?= number_format($row['brgstok'],0); ?></td>
                 <td>
 
@@ -126,9 +114,6 @@ Ini Adalah Judul Barang
                             <i class="fa fa-trash-alt"></i>
                         </button>
                     </form>
-
-
-
                 </td>
             </tr>
 
@@ -138,33 +123,23 @@ Ini Adalah Judul Barang
 <div class="float-left mt-4">
     <?= $pager->links('barang','paging') ?>
 </div>
-
-
-
-
 <div class="float-left mt-4">
     <?= $pager->links('barang','paging') ?>
 </div>
 
-
+<div class="float-left mt-4">
+    <?= $pager->links('barang','paging') ?>
+</div>
 <div class="float-left mt-4">
     <?= $pager->links('barang','paging') ?>
 </div>
 
-
-
 <div class="float-left mt-4">
     <?= $pager->links('barang','paging') ?>
 </div>
-
-
-
-
 <div class="float-left mt-4">
     <?= $pager->links('barang','paging') ?>
 </div>
-
-
 <script>
     function edit(kode) {
         window.location.href = ('/barang/edit/' + kode);
@@ -179,13 +154,7 @@ Ini Adalah Judul Barang
         }
     }
 </script>
-
 <?= $this->endSection('isi') ?>
-
-
 <?= $this->endSection('isi') ?>
-
-
 <?= $this->endSection('isi') ?>
-
-
+<?= $this->endSection('isi') ?>

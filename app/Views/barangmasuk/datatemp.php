@@ -16,9 +16,6 @@
 
         $nomor = 1;
         foreach ($datatemp->getResultArray() as $row) :
-
-
-
         $nomor = 1;
         foreach ($datatemp->getResultArray() as $row) :
         ?>
@@ -88,8 +85,6 @@
 </script>
             $nomor = 1;
             foreach($datatemp->getResultArray() as $row):
-
-
         ?>
             <tr>
                 <td><?= $nomor++; ?></td>
@@ -153,13 +148,7 @@
             }
         })
     }
-
-
-
 </script>
 </script>
 </script>
-
-
-
 </script>

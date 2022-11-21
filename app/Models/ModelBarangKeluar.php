@@ -6,6 +6,16 @@ use CodeIgniter\Model;
 
 class ModelBarangKeluar extends Model
 {
+    protected $table            = 'barangkeluar';
+    protected $primaryKey       = 'faktur';
+    protected $allowedFields    = [
+        'faktur', 'tglfaktur', 'idpel', 'totalharga'
+    ];
+
+    public function noFaktur($tanggalSekarang){
+        return $this->table('barangkeluar')->select('max(faktur) as nofaktur')->where('tglfaktur', $tanggalSekarang)->get();
+        
+    }
     protected $DBGroup          = 'default';
     protected $table            = 'modelbarangkeluars';
     protected $primaryKey       = 'id';

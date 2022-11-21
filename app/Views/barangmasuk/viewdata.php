@@ -44,7 +44,6 @@ Data Transaksi Barang Masuk
                 <td><?= $nomor; ?></td>
                 <td><?= $row['faktur']; ?></td>
                 <td><?= date('d-m-Y', strtotime($row['tglfaktur'])); ?></td>
-
                 <td align="center">
                     <?php
                         $db = \Config\Database::connect();
@@ -52,18 +51,12 @@ Data Transaksi Barang Masuk
                     ?>
                     <span style="cursor:pointer; font-weight: bold; color: blue;" 
                         onclick="detailItem('<?= $row['faktur'] ?>')"><?= $jumlahItem; ?></span>
-
-
                 <td>
-
-
-
                 </td>
                 <td>
                     <?= number_format($row['totalharga'], 0, ",", ".") ?>
                 </td>
                 <td>
-
                     <button type="button" class="btn btn-sm btn-outline-info" title="Edit Transaksi"
                         onclick="edit('<?= sha1($row['faktur']) ?>')">
                         <i class="fa fa-edit"></i>
@@ -73,21 +66,16 @@ Data Transaksi Barang Masuk
                         onclick="hapusTransaksi('<?=($row['faktur']) ?>')">
                         <i class="fa fa-trash-alt"></i>
                     </button>
-
                 </td>
             </tr>
         <?php endforeach; ?>
     </tbody>
 </table>
-
-
 <div class="viewmodal" style="display: none;"></div>
 <div class="float-left mt-4">
     <?= $pager->links('barangmasuk', 'paging') ?>
 </div>
 <script>
-
-
     function hapusTransaksi(faktur){
         Swal.fire({
             title: 'Hapus Transaksi',
@@ -129,7 +117,6 @@ Data Transaksi Barang Masuk
     function edit(faktur){
         window.location.href=('/barangmasuk/edit/')+faktur;
     }
-
     function detailItem(faktur){
         alert(faktur);
         $.ajax({
@@ -151,11 +138,7 @@ Data Transaksi Barang Masuk
         });
     }
 </script>
-
-
 <div class="float-left mt-4">
     <?= $pager->links('barangmasuk', 'paging') ?>
 </div>
-
-
 <?= $this->endSection('isi') ?>

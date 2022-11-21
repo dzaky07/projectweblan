@@ -6,6 +6,15 @@ use CodeIgniter\Model;
 
 class ModelPelanggan extends Model
 {
+    protected $table            = 'pelanggan';
+    protected $primaryKey       = 'pelid';
+    protected $allowedFields    = [
+        'pelnama', 'peltelp'
+    ];
+
+    public function ambilDataTerakhir(){
+        return $this->table('pelanggan')->limit(1)->orderBy('pelid', 'DESC')->get();
+    }
     protected $DBGroup          = 'default';
     protected $table            = 'modelpelanggans';
     protected $primaryKey       = 'id';

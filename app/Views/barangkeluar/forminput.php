@@ -18,6 +18,7 @@ Input Transaksi Barang Keluar
     <div class="col-lg-4">
         <div class="form-group">
             <label for="">No.Faktur</label>
+            <input type="text" name="nofaktur" id="nofaktur" value="<?= $nofaktur ?>" class="form-control" readonly>
             <input type="text" name="nofaktur" id="nofaktur" class="form-control" readonly>
         </div>
     </div>
@@ -32,6 +33,7 @@ Input Transaksi Barang Keluar
             <label for="">Cari Pelanggan</label>
             <div class="input-group mb-3">
                 <input type="text" class="form-control" placeholder="Nama Pelanggan" name="namapelanggan" id="namapelanggan" readonly>
+                <input type="text" name="idpelanggan" id="idpelanggan">
                 <input type="hidden" name="idpelanggan" id="idpelanggan">
                 <div class="input-group-append">
                     <button class="btn btn-outline-primary" type="button" id="tombolCariPelanggan" title="Cari Pelanggan">
@@ -89,5 +91,48 @@ Input Transaksi Barang Keluar
         </div>
     </div>
 </div>
+<div class="viewmodal" style="display: none;"></div>
+<script>
+    function buatNofaktur() {
+        let tanggal = $('#tglfaktur').val()
 
+        $.ajax({
+            type: "post",
+            url: "/barangkeluar/buatNoFaktur",
+            data: {
+                tanggal: tanggal
+            },
+            dataType: "json",
+            success: function(response) {
+                $('#nofaktur').val(response.nofaktur);
+
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert(xhr.status + '\n' + thrownError);
+            }
+        });
+    }
+    $(document).ready(function() {
+        $('#tglfaktur').change(function(e) {
+            buatNofaktur();
+        });
+
+        $('#tombolTambahPelanggan').click(function(e) {
+            e.preventDefault();
+            $.ajax({
+                url: "/pelanggan/formtambah",
+                dataType: "json",
+                success: function(response) {
+                    if(response.data){
+                        $('.viewmodal').html(response.data).show();
+                        $('#modaltambahpelanggan').modal('show');
+                    }
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status + '\n' + thrownError);
+                }
+            });
+        });
+    });
+</script>
 <?= $this->endSection('isi') ?>
