@@ -28,5 +28,6 @@ class Modelbarangmasuk extends Model
             
         }
     }
+
 }
 

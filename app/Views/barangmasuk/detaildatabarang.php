@@ -37,4 +37,14 @@ function pilih(kode){
     })
     $('#modalcaribarang').modal('hide');
 }
+
 </script>
+
+
+</script>
+
+
+</script>
+
+
+
