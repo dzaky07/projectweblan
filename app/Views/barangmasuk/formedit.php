@@ -1,7 +1,7 @@
 <?= $this->extend('main/layout') ?>
 
 <?= $this->section('judul') ?>
-Input Barang Masuk
+Edit Barang Masuk
 <?= $this->endSection('judul') ?>
 
 <?= $this->section('subjudul') ?>
@@ -13,17 +13,22 @@ Input Barang Masuk
 <?= $this->endSection('subjudul') ?>
 
 <?= $this->section('isi') ?>
-<div class="form-row">
-  <div class="form-group col-md-6">
-    <label for="">Input Faktur Barang Masuk</label>
-    <input type="text" class="form-control" placeholder="No.Faktur" name="faktur" id="faktur">
-  </div>
-  <div class="form-group col-md-6">
-    <label for="">Tanggal Faktur</label>
-    <input type="date" class="form-control" name="tglfaktur" id="tglfaktur" value="<?= date('Y-m-d') ?>">
-  </div>
-</div>
-
+<table class="table table-sm table-striped table-hover" style="width: 100%;">
+    <tr>
+        <td style="width: 20%;">No.Faktur</td>
+        <td style="width: 2%;">:</td>
+        <td style="width: 28%;"><?= $nofaktur ?></td>
+        <td rowspan="3" style="vertical-align: middle; text-align: center; font-weight: bold; font-size:25pt" 
+        id="totalHarga">
+        
+    </td>
+    <input type="hidden" id="faktur" value="<?= $nofaktur;?>">
+    </tr>
+    <tr>
+        <td style="width: 20%;">Tanggal Faktur</td>
+        <td style="width: 2%;">:</td>
+        <td style="width: 28%;"><?= date('d-m-Y', strtotime($tanggal)) ?></td>
+</table>
 <div class="card">
   <div class="card-header bg-primary">
     Input Barang
@@ -41,6 +46,7 @@ Input Barang Masuk
             </button>
           </div>
         </div>
+        <input type="hidden" name="iddetail" id="iddetail">
       </div>
       <div class="form-group col-md-3">
         <label for="">Nama Barang</label>
@@ -61,37 +67,40 @@ Input Barang Masuk
       <div class="form-group col-md-1">
         <label for="">Aksi</label>
         <div class="input-group"></div>
-        <button type="button" class="btn btn -sm btn-info" title="tambah item" id="tombolTambahItem">
+        <button type="button" class="btn btn -sm btn-info" title="Tambah item" id="tombolTambahItem">
           <i class="fa fa-plus-square"></i>
         </button>
-        <button type="button" class="btn btn -sm btn-warning" title="Releod Data" id="tombolReload">
+        
+        <button style="display: none;" type="button" class="btn btn -sm btn-primary" title="Edit item" id="tombolEditItem">
+          <i class="fa fa-edit"></i>
+        </button>
+        &nbsp;
+        <button style="display: none;" type="button" class="btn btn -sm btn-secondary" title="Reload" id="tombolReload">
           <i class="fa fa-sync-alt"></i>
         </button>
       </div>
     </div>
-    <div class="row" id="tampilDataTemp"></div>
-    <div class="row justify-content-end">
-      <button type="button" class="btn btn-lg btn-success" id="tombolSelesaiTransaksi">
-        <i class="fa fa-save"></i> Selesai Transaksi
-      </button>
-    </div>
+    <div>
+    <div class="row" id="tampilDataDetail"></div>
+   
   </div>
 </div>
 <div class="modalcaribarang" style="display: none;"></div>
 <script>
-  function dataTemp() {
+    function dataDetail() {
     let faktur = $('#faktur').val();
 
     $.ajax({
       type: "post",
-      url: "/barangmasuk/dataTemp",
+      url: "/barangmasuk/dataDetail",
       data: {
         faktur: faktur
       },
       dataType: "json",
       success: function(response) {
         if (response.data) {
-          $('#tampilDataTemp').html(response.data);
+          $('#tampilDataDetail').html(response.data);
+          $('#totalHarga').html(response.totalharga);
         }
       },
       error: function(xhr, ajaxOptions, thrownError) {
@@ -99,7 +108,6 @@ Input Barang Masuk
       }
     });
   }
-
   function kosong() {
     $('#kdbarang').val('');
     $('#namabarang').val('');
@@ -108,7 +116,6 @@ Input Barang Masuk
     $('#jumlah').val('');
     $('#kdbarang').focus();
   }
-
   function ambilDataBarang() {
     let kodebarang = $('#kdbarang').val();
 
@@ -138,15 +145,17 @@ Input Barang Masuk
       }
     });
   }
-  $(document).ready(function() {
-    dataTemp();
-
-    $('#kdbarang').keydown(function(e) {
-      if (e.keyCode == 13) {
-        e.preventDefault();
-        ambilDataBarang();
-      }
-    });
+  $(document).ready(function(){
+    dataDetail();
+    
+    $('#tombolReload').click(function(e){
+      e.preventDefault();
+      $('#iddetail').val('');
+      $(this).hide();
+      $('tombolEditItem').hide();
+      $('tombolTambahItem').fadeIn();
+      kosong();
+    })
 
     $('#tombolTambahItem').click(function(e) {
       e.preventDefault();
@@ -194,7 +203,7 @@ Input Barang Masuk
       } else {
         $.ajax({
           type: "post",
-          url: "/barangmasuk/simpanTemp",
+          url: "/barangmasuk/simpanDetail",
           data: {
             faktur: faktur,
             kodebarang: kodebarang,
@@ -207,7 +216,7 @@ Input Barang Masuk
             if (response.sukses) {
               alert(response.sukses);
               kosong();
-              dataTemp();
+              dataDetail();
             }
           },
           error: function(xhr, ajaxOptions, thrownError) {
@@ -217,11 +226,38 @@ Input Barang Masuk
       }
     });
 
-    $('#tombolReload').click(function(e) {
+    $('#tombolEditItem').click(function (e) { 
       e.preventDefault();
-      dataTemp();
+      let faktur = $('#faktur').val();
+      let kodebarang = $('#kdbarang').val();
+      let hargabeli = $('#hargabeli').val();
+      let jumlah = $('#jumlah').val();
+      let hargajual = $('#hargajual').val();
+      $.ajax({
+        type: "post",
+        url: "/barangmasuk/updateItem",
+        data: {
+          iddetail : $('#iddetail').val(),
+          faktur: faktur,
+          kodebarang: kodebarang,
+          hargabeli: hargabeli,
+          hargajual: hargajual,
+          jumlah: jumlah
+        },
+        dataType: "json",
+        success: function(response) {
+          if (response.sukses) {
+            alert(response.sukses);
+            kosong();
+            dataDetail();
+          }
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+          alert(xhr.status + '\n' + thrownError);
+        }
+      });
     });
-
+    
     $('#tombolCariBarang').click(function(e) {
       e.preventDefault();
       $.ajax({
@@ -238,64 +274,9 @@ Input Barang Masuk
         }
       });
     });
-    $('#tombolSelesaiTransaksi').click(function(e) {
-      e.preventDefault();
-      let faktur = $('#faktur').val();
-
-      if (faktur.length == 0) {
-        Swal.fire({
-          title: 'Pesan',
-          icon: 'warning',
-          text: 'Maaf, faktur tidak boleh kosong'
-        });
-      } else {
-        Swal.fire({
-          title: 'Selesai Transaksi',
-          text: "Yakin transaksi ini disimpan?",
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Ya, Simpan'
-        }).then((result) => {
-          if (result.isConfirmed) {
-            $.ajax({
-              type: "post",
-              url: "/barangmasuk/selesaiTransaksi",
-              data: {
-                faktur: faktur,
-                tglfaktur: $('#tglfaktur').val()
-              },
-              dataType: "json",
-              success: function(response) {
-                if (response.error) {
-                  Swal.fire({
-                    title: 'Error',
-                    icon: 'error',
-                    text: response.error
-                  });
-                }
-
-                if(response.sukses){
-                  Swal.fire({
-                    title: 'Berhasil',
-                    icon: 'success',
-                    text: response.sukses
-                  }).then((result) =>{
-                    if(result.isConfirmed){
-                      window.location.reload();
-                    }
-                  })
-                }
-              },
-              error: function(xhr, ajaxOptions, thrownError) {
-                alert(xhr.status + '\n' + thrownError);
-              }
-            });
-          }
-        })
-      }
-    });
   });
+
 </script>
+
+
 <?= $this->endSection('isi') ?>

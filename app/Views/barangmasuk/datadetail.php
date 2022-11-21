@@ -14,7 +14,7 @@
     <tbody>
         <?php
         $nomor = 1;
-        foreach ($datatemp->getResultArray() as $row) :
+        foreach ($datadetail->getResultArray() as $row) :
         ?>
             <tr>
                 <td><?= $nomor++; ?></td>
@@ -35,12 +35,46 @@
                 <td>
                     <button type="button" class="btn btn-sm btn-outline-danger" onclick="hapusItem('<?= $row['iddetail'] ?>')">
                         <i class="fa fa-trash-alt"></i>
+                    </button>
+                    <button type="button" class="btn btn-sm btn-outline-info" onclick="editItem('<?= $row['iddetail'] ?>')">
+                        <i class="fa fa-edit"></i>
+                    </button>
                 </td>
             </tr>
         <?php endforeach; ?>
     </tbody>
 </table>
 <script>
+    function editItem(id) {
+        $('#iddetail').val(id);
+        $.ajax({
+            type: "post",
+            url: "/barangmasuk/editItem",
+            data: {
+                iddetail :$('#iddetail').val()
+            },
+            dataType: "json",
+            success: function (response) {
+                if(response.sukses){
+                    let data = response.sukses;
+
+                    $('#kdbarang').val(data.kodebarang);
+                    $('#namabarang').val(data.namabarang);
+                    $('#hargajual').val(data.hargajual);
+                    $('#hargabeli').val(data.hargabeli);
+                    $('#jumlah').val(data.jumlah);
+
+                    $('#tombolEditItem').fadeIn();
+                    $('#tombolReload').fadeIn();
+                    $('#tombolTambahItem').fadeOut();
+                }
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert(xhr.status + '\n' + thrownError);
+            }
+        });
+    }
+
     function hapusItem(id) {
         Swal.fire({
             title: 'Hapus Item',
@@ -54,14 +88,15 @@
             if (result.isConfirmed) {
                 $.ajax({
                     type: "post",
-                    url: "/barangmasuk/hapus",
+                    url: "/barangmasuk/hapusItemDetail",
                     data: {
-                        id: id
+                        id: id,
+                        faktur : $('#faktur').val()
                     },
                     dataType: "json",
                     success: function(response) {
                         if (response.sukses) {
-                            dataTemp();
+                            dataDetail();
                             Swal.fire({
                                 icon: 'success',
                                 title: 'Berhasil',

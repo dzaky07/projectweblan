@@ -13,5 +13,20 @@ class Modelbarangmasuk extends Model
         'faktur', 'tglfaktur', 'totalharga'
     ];
 
-    
+    public function tampildata_cari($cari){
+        return $this->table('barangmasuk')->like('faktur', $cari);
+    }
+
+    public function cekFaktur($faktur){
+        return $this ->table('barangmasuk') ->getWhere([
+            'sha1(faktur)' =>$faktur
+
+        ]);
+    }
+    function dataDetail(){
+        if($this->request->isAJAX()){
+            
+        }
+    }
 }
+
