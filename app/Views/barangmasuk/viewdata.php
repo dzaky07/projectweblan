@@ -51,6 +51,7 @@ Data Transaksi Barang Masuk
                     ?>
                     <span style="cursor:pointer; font-weight: bold; color: blue;" 
                         onclick="detailItem('<?= $row['faktur'] ?>')"><?= $jumlahItem; ?></span>
+                <td>
                 </td>
                 <td>
                     <?= number_format($row['totalharga'], 0, ",", ".") ?>
@@ -75,7 +76,6 @@ Data Transaksi Barang Masuk
     <?= $pager->links('barangmasuk', 'paging') ?>
 </div>
 <script>
-
     function hapusTransaksi(faktur){
         Swal.fire({
             title: 'Hapus Transaksi',
@@ -138,4 +138,7 @@ Data Transaksi Barang Masuk
         });
     }
 </script>
+<div class="float-left mt-4">
+    <?= $pager->links('barangmasuk', 'paging') ?>
+</div>
 <?= $this->endSection('isi') ?>

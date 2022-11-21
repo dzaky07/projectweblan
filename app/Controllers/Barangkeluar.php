@@ -40,6 +40,9 @@ class Barangkeluar extends BaseController
         ];
         echo json_encode($json);
     }
+
+class Barangkeluar extends BaseController
+{
     public function data()
     {
         return view('barangkeluar/viewdata');
@@ -51,5 +54,7 @@ class Barangkeluar extends BaseController
             'nofaktur' => $this->buatFaktur()
         ];
         return view('barangkeluar/forminput', $data);
+    public function input(){
+        return view('barangkeluar/forminput');
     }
 }

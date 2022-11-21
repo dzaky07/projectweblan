@@ -63,5 +63,11 @@ class Pelanggan extends BaseController
         }
 
         echo json_encode($json);
+
+class Pelanggan extends BaseController
+{
+    public function index()
+    {
+        //
     }
 }

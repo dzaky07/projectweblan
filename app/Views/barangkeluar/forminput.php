@@ -19,6 +19,7 @@ Input Transaksi Barang Keluar
         <div class="form-group">
             <label for="">No.Faktur</label>
             <input type="text" name="nofaktur" id="nofaktur" value="<?= $nofaktur ?>" class="form-control" readonly>
+            <input type="text" name="nofaktur" id="nofaktur" class="form-control" readonly>
         </div>
     </div>
     <div class="col-lg-4">
@@ -33,6 +34,7 @@ Input Transaksi Barang Keluar
             <div class="input-group mb-3">
                 <input type="text" class="form-control" placeholder="Nama Pelanggan" name="namapelanggan" id="namapelanggan" readonly>
                 <input type="text" name="idpelanggan" id="idpelanggan">
+                <input type="hidden" name="idpelanggan" id="idpelanggan">
                 <div class="input-group-append">
                     <button class="btn btn-outline-primary" type="button" id="tombolCariPelanggan" title="Cari Pelanggan">
                         <i class="fa fa-search"></i>
